@@ -21,9 +21,9 @@ AS A person that likes to travel, I WANT to enter a city I would like to travel 
 
 ### Wireframe or sketch of the design
 
-![Project Mock](./resources/images/Destination-Hub-Mock.jpg)
+![Project Mock](./assets/images/Destination-Hub-Mock.jpg)
 
-![Responsive](./resources/images/Bucket-Traveler.jpg)
+![Responsive](./assets/images/Bucket-Traveler.jpg)
 
 -
 ### APIs identified
