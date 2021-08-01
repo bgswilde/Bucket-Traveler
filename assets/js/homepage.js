@@ -1,8 +1,8 @@
 var apiKey = "5ae2e3f221c38a28845f05b69ebaab9667831cd14bd320fe563efa88";
-var apiKey2 = "";
+var apiKey2 = "5ae2e3f221c38a28845f05b6a749653163ddad9adc28cbe035c9fa5e";
 var placesArray = [];
 var cardContainer = document.getElementById("attractions");
-var searchBtn = document.getElementById("searchBtn");
+var search = document.getElementById("searchBtn");
 
 var getPlaces = function() {
     // clear array
@@ -19,7 +19,7 @@ var getPlaces = function() {
                     console.log(data)
                     for (var i = 0; i < 10; i++) {
                         // fetch call using xid for more data
-                        fetch("https://api.opentripmap.com/0.1/en/places/xid/" + data[i].xid + "?apikey=" + apiKey)
+                        fetch("https://api.opentripmap.com/0.1/en/places/xid/" + data[i].xid + "?apikey=" + apiKey2)
                         // push into the array
                         .then(response => response.json())
                         .then(data => {
@@ -64,4 +64,4 @@ var getPlaces = function() {
 }
 
 // event listeners
-document.addEventListener("submit", getPlaces);
+search.addEventListener("submit", getPlaces);
