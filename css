@@ -1,0 +1,61 @@
+.hero {
+    background-image:url('.assets/pexels-pixabay-210186.jpg');
+    background-color: aquamarine;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    overflow: visible;
+    display: flex;
+    flex-wrap: wrap;  
+    background-attachment: fixed;
+    background-position: 80%;
+    height: 500px;
+    margin-bottom: 20px;
+    
+   
+}
+.hero-content{
+    justify-content: center;
+    align-items: center;
+}
+
+
+    img{
+        height: 200px;
+        width: 300px;
+        border-radius: 20px;
+        justify-content: center;
+        align-items: baseline;
+       
+    }
+
+     .searchbar{ 
+        width: 100%;
+        max-width: 300px;
+        display: inline-flex;
+       
+
+
+    }
+    .searchinp {
+        flex-grow: 1;
+        padding: 10px;
+        border: 2px solid black;
+        border-radius: 5px 0 0 5px;
+        background: #229ebf;
+       
+    }
+        
+       
+    .searchbtn{
+        width: 40px;
+        background-color: #229ebf;
+        border-radius: 0 5px 5px 0;
+        border: 2px solid black;
+    }
+
+
+
+   
+
+    
