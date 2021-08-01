@@ -54,6 +54,10 @@
         border: 2px solid black;
     }
 
+    .attractions-row {
+        flex-wrap: wrap;
+    }
+
 
 
    
