@@ -1,8 +1,10 @@
 var apiKey = "5ae2e3f221c38a28845f05b69ebaab9667831cd14bd320fe563efa88";
-var apiKey2 = "";
+var apiKey2 = "5ae2e3f221c38a28845f05b6a749653163ddad9adc28cbe035c9fa5e";
 var placesArray = [];
 var cardContainer = document.getElementById("attractions");
-var searchBtn = document.getElementById("searchBtn");
+var search = document.getElementById("searchBtn");
+var city = document.getElementById("enter-city");
+let searchHistory = JSON.parse(localStorage.getItem("searchBtn")) || [];
 
 var getPlaces = function() {
     // clear array
@@ -61,6 +63,18 @@ var getPlaces = function() {
                     placeCard.appendChild(placeTitle, placeImage, placeText, saveBtn, moreBtn);
                 }
         }))
+
+        //Get history
+        search.addEventListener("click", function () {
+            const searchTerm = city.value;
+            getPlaces(searchTerm);
+            searchHistory.push(searchTerm);
+            localStorage.setItem("searchBtn", JSON.stringify(searchHistory));
+        })
+
+        if (searchHistory.length > 0) {
+            getPlaces(searchHistory[searchHistory.length - 1]);
+        }
 }
 
 // event listeners
