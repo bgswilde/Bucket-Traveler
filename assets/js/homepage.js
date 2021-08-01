@@ -79,3 +79,5 @@ var getPlaces = function() {
 
 // event listeners
 document.addEventListener("submit", getPlaces);
+
+//test
