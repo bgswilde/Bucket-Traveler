@@ -2,23 +2,76 @@ var apiKey = "5ae2e3f221c38a28845f05b69ebaab9667831cd14bd320fe563efa88";
 var apiKey2 = "5ae2e3f221c38a28845f05b6a749653163ddad9adc28cbe035c9fa5e";
 var placesArray = [];
 var cardContainer = document.getElementById("attractions");
-var search = document.getElementById("searchBtn");
+var searchEl = document.getElementById("search-element");
 var city = document.getElementById("enter-city");
 let searchHistory = JSON.parse(localStorage.getItem("searchBtn")) || [];
 
-var getPlaces = function() {
+var searchSubmitHandler = function(event) {
+    // prevent page from refreshing
+    event.preventDefault();
+
+    // get value from search
+    var cityName = city.value.trim();
+
+    if (cityName) {
+        getPlaces(cityName);
+
+    } else {
+        alert("Search invalid. Check your spelling, and avoid small or fictional cities");
+    }
+};
+
+var createCards = function(placesArray) {
+    for (var i = 0; i < placesArray.length; i++) {
+        // create a card to hold data
+        var placeCard = document.createElement("div");
+        placeCard.classList = "card";
+        cardContainer.appendChild(placeCard);
+
+        // create a title for each card
+        var placeTitle = document.createElement("p");
+        placeTitle.classList = "title is-4";
+        placeTitle.textContent = placesArray[i].name;
+
+        // create an image for each card
+        var placeImage = document.createElement("figure");
+        placeImage.classList = "image is-4by3";
+        placeImage.innerHTML = "<img src='" + placesArray[i].image + "' alt='image showing a view of " + placesArray[i].name + "'>";
+
+        // create a description for each card
+        var placeText = document.createElement("p");
+        placeText.classList = "description";
+        placeText.textContent = placesArray[i].wikipedia_extracts.text;
+        
+        // create a save button 
+        var saveBtn = document.createElement("button");
+        saveBtn.classList = "saveBtn";
+
+        // create a more details button
+        var moreBtn = document.createElement("button");
+        moreBtn.classList = "moreBtn";
+
+        // append children to card
+        placeCard.appendChild(placeTitle, placeImage, placeText, saveBtn, moreBtn);
+
+        // append cards to container
+
+    }
+};
+
+var getPlaces = function(searchCity) {
     // clear array
+    placesArray = [];
     // fetch the city name from search to get coordinates(fix link below to reflect)
-    fetch("https://api.opentripmap.com/0.1/en/places/geoname?name=seattle&apikey=" + apiKey)
+    fetch("https://api.opentripmap.com/0.1/en/places/geoname?name=" + searchCity + "&apikey=" + apiKey)
         .then(response => (response.json())
             // take coordinates from previous fetch data to get places array
         .then(data => {
-            console.log(data)
             fetch("https://api.opentripmap.com/0.1/en/places/radius?radius=35000&lon=" + data.lon + "&lat=" + data.lat + "&rate=3&kinds=natural&limit=10&format=json&apikey=" + apiKey)
                 .then(response => (response.json())
                 .then(data => {
                     // for loop to push data to placesArray
-                    console.log(data)
+                    // console.log(data)
                     for (var i = 0; i < 10; i++) {
                         // fetch call using xid for more data
                         fetch("https://api.opentripmap.com/0.1/en/places/xid/" + data[i].xid + "?apikey=" + apiKey2)
@@ -27,55 +80,26 @@ var getPlaces = function() {
                         .then(data => {
                             console.log(data)
                             placesArray.push(data)
+                            
                         })
-                    }
+                    };
                 }))
-                Promise; for (var i = 0; i < placesArray.length; i++) {
-                    // create a card to hold data
-                    var placeCard = document.createElement("div");
-                    placeCard.classList = "card";
-                    cardContainer.appendChild(placeCard);
-
-                    // create a title for each card
-                    var placeTitle = document.createElement("p");
-                    placeTitle.classList = "title is-4";
-                    placeTitle.textContent = placesArray[i].name;
-
-                    // create an image for each card
-                    var placeImage = document.createElement("figure");
-                    placeImage.classList = "image is-4by3";
-                    placeImage.innerHTML = "<img src='" + placesArray[i].image + "' alt='image showing a view of " + placesArray[i].name + "'>";
-
-                    // create a description for each card
-                    var placeText = document.createElement("p");
-                    placeText.classList = "description";
-                    placeText.textContent = placesArray[i].wikipedia_extracts.text;
-                    
-                    // create a save button 
-                    var saveBtn = document.createElement("button");
-                    saveBtn.classList = "saveBtn";
-
-                    // create a more details button
-                    var moreBtn = document.createElement("button");
-                    moreBtn.classList = "moreBtn";
-
-                    // append children to card
-                    placeCard.appendChild(placeTitle, placeImage, placeText, saveBtn, moreBtn);
-                }
+            //.then(createCards());
         }))
 
-        //Get history
-        search.addEventListener("click", function () {
-            const searchTerm = city.value;
-            getPlaces(searchTerm);
-            searchHistory.push(searchTerm);
-            localStorage.setItem("searchBtn", JSON.stringify(searchHistory));
-        })
+        // //Get history
+        // search.addEventListener("click", function () {
+        //     const searchTerm = city.value;
+        //     getPlaces(searchTerm);
+        //     searchHistory.push(searchTerm);
+        //     localStorage.setItem("searchBtn", JSON.stringify(searchHistory));
+        // })
 
-        if (searchHistory.length > 0) {
-            getPlaces(searchHistory[searchHistory.length - 1]);
-        }
+        // if (searchHistory.length > 0) {
+        //     getPlaces(searchHistory[searchHistory.length - 1]);
+        // }
 }
 
+// getPlaces();
 // event listeners
-search.addEventListener("submit", getPlaces);
+searchEl.addEventListener("submit", searchSubmitHandler);
