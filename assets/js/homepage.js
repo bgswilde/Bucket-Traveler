@@ -21,7 +21,8 @@ var searchSubmitHandler = function(event) {
     }
 };
 
-var createCards = function(placesArray) {
+var createCards = function() {
+    console.log("this was reached");
     for (var i = 0; i < placesArray.length; i++) {
         // create a card to hold data
         var placeCard = document.createElement("div");
@@ -84,8 +85,9 @@ var getPlaces = function(searchCity) {
                         })
                     };
                 }))
-            //.then(createCards());
+                .then(createCards(placesArray));
         }))
+        
 
         // //Get history
         // search.addEventListener("click", function () {
