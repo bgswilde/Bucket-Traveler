@@ -21,45 +21,6 @@ var searchSubmitHandler = function(event) {
     }
 };
 
-var createCards = function() {
-    console.log("this was reached");
-    for (var i = 0; i < placesArray.length; i++) {
-        // create a card to hold data
-        var placeCard = document.createElement("div");
-        placeCard.classList = "card";
-        cardContainer.appendChild(placeCard);
-
-        // create a title for each card
-        var placeTitle = document.createElement("p");
-        placeTitle.classList = "title is-4";
-        placeTitle.textContent = placesArray[i].name;
-
-        // create an image for each card
-        var placeImage = document.createElement("figure");
-        placeImage.classList = "image is-4by3";
-        placeImage.innerHTML = "<img src='" + placesArray[i].image + "' alt='image showing a view of " + placesArray[i].name + "'>";
-
-        // create a description for each card
-        var placeText = document.createElement("p");
-        placeText.classList = "description";
-        placeText.textContent = placesArray[i].wikipedia_extracts.text;
-        
-        // create a save button 
-        var saveBtn = document.createElement("button");
-        saveBtn.classList = "saveBtn";
-
-        // create a more details button
-        var moreBtn = document.createElement("button");
-        moreBtn.classList = "moreBtn";
-
-        // append children to card
-        placeCard.appendChild(placeTitle, placeImage, placeText, saveBtn, moreBtn);
-
-        // append cards to container
-
-    }
-};
-
 var getPlaces = function(searchCity) {
     // clear array
     placesArray = [];
@@ -81,12 +42,116 @@ var getPlaces = function(searchCity) {
                         .then(data => {
                             console.log(data)
                             placesArray.push(data)
-                            
                         })
                     };
                 }))
-                .then(createCards(placesArray));
+                
         }))
+        // creating cards
+        Promise.console.log("this was reached");
+        for (var i = 0; i < placesArray.length; i++) {
+            // create a column div to hold the card
+            var columnDiv = document.createElement("div");
+            columnDiv.classList = "column is-one-fifth";
+            cardContainer.appendChild(columnDiv);
+    
+            // create a card to hold data
+            var placeCard = document.createElement("div");
+            placeCard.classList = "card";
+            columnDiv.appendChild(placeCard);
+    
+            // create a title for each card
+            var placeTitle = document.createElement("p");
+            placeTitle.classList = "title is-4";
+            placeTitle.textContent = placesArray[i].name;
+    
+            // create an image for each card
+            var placeImage = document.createElement("figure");
+            var imageData = document.createElement("img");
+            placeImage.classList = "image is-4by3";
+            imageData.setAttribute("src", "'" + placesArray[i].image + "'");
+            imageData.setAttribute("alt", "‘image showing a view of " + placesArray[i].name + "'");
+            placeImage.appendChild(imageData);
+    
+            // create a description for each card
+            var placeText = document.createElement("p");
+            placeText.classList = "description";
+            placeText.textContent = placesArray[i].wikipedia_extracts.text;
+            
+            // create a card footer with save and more buttons
+            var footer = document.createElement("footer");
+            var saveBtn = document.createElement("a");
+            var moreBtn = document.createElement("a");
+            footer.classList = "card-footer";
+            saveBtn.classList = "card-footer-item";
+            moreBtn.classList = "card-footer-item";
+            saveBtn.setAttribute("href", "#");
+            moreBtn.setAttribute("href", "#");
+            footer.appendChild(saveBtn);
+            footer.appendChild(moreBtn);
+    
+    
+            // append children to card
+            placeCard.appendChild(placeTitle); 
+            placeCard.appendChild(placeImage);
+            placeCard.appendChild(placeText);
+            placeCard.appendChild(footer);
+          
+        }
+
+var createCards = function() {
+    console.log("this was reached");
+    for (var i = 0; i < placesArray.length; i++) {
+        // create a column div to hold the card
+        var columnDiv = document.createElement("div");
+        columnDiv.classList = "column is-one-fifth";
+        cardContainer.appendChild(columnDiv);
+
+        // create a card to hold data
+        var placeCard = document.createElement("div");
+        placeCard.classList = "card";
+        columnDiv.appendChild(placeCard);
+
+        // create a title for each card
+        var placeTitle = document.createElement("p");
+        placeTitle.classList = "title is-4";
+        placeTitle.textContent = placesArray[i].name;
+
+        // create an image for each card
+        var placeImage = document.createElement("figure");
+        var imageData = document.createElement("img");
+        placeImage.classList = "image is-4by3";
+        imageData.setAttribute("src", "'" + placesArray[i].image + "'");
+        imageData.setAttribute("alt", "‘image showing a view of " + placesArray[i].name + "'");
+        placeImage.appendChild(imageData);
+
+        // create a description for each card
+        var placeText = document.createElement("p");
+        placeText.classList = "description";
+        placeText.textContent = placesArray[i].wikipedia_extracts.text;
+        
+        // create a card footer with save and more buttons
+        var footer = document.createElement("footer");
+        var saveBtn = document.createElement("a");
+        var moreBtn = document.createElement("a");
+        footer.classList = "card-footer";
+        saveBtn.classList = "card-footer-item";
+        moreBtn.classList = "card-footer-item";
+        saveBtn.setAttribute("href", "#");
+        moreBtn.setAttribute("href", "#");
+        footer.appendChild(saveBtn);
+        footer.appendChild(moreBtn);
+
+
+        // append children to card
+        placeCard.appendChild(placeTitle); 
+        placeCard.appendChild(placeImage);
+        placeCard.appendChild(placeText);
+        placeCard.appendChild(footer);
+      
+    }
+};
+
         
 
         // //Get history
