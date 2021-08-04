@@ -161,3 +161,4 @@ var getPlaces = function (searchCity) {
 searchEl.addEventListener("submit", searchSubmitHandler);
 
 // testing new push develop
+// test main
