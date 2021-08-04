@@ -38,4 +38,48 @@
         width: 100%;
         max-width: 300px;
         display: inline-flex;
-     }
+       
+
+
+    }
+    .searchinp {
+        flex-grow: 1;
+        padding: 10px;
+        border: 2px solid var(--secondary-color);
+        border-radius: 5px 0 0 5px;
+        background-color: white;
+       
+    }
+        
+       
+    .searchbtn{
+        width: 40px;
+        background-color: white;
+        border-radius: 0 5px 5px 0;
+        border: 2px solid var(--secondary-color);
+    }
+#attractions {
+margin-left: 50px;
+margin-right: 50px;
+background-color: #7065ab;
+}
+
+#saved-attractions {
+    margin-left: 50px;
+    margin-right: 50px;
+    background-color: #e6c9d1;
+    }
+.ellipsis {
+    overflow:hidden; 
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#saved-title {
+    margin-top: 40px;
+    margin-bottom: 50px;
+}
+
+.searchbtn:hover {
+    background: var(--primary-color);
+}
