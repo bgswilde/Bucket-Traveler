@@ -59,7 +59,7 @@ var createCards = function() {
 
         // create a card to hold data
         var placeCard = document.createElement("div");
-        placeCard.classList = "card";
+        placeCard.classList = "card card-h br-0";
         columnDiv.appendChild(placeCard);
         
         // create an image for each card
@@ -72,20 +72,20 @@ var createCards = function() {
 
         // create a title for each card
         var placeTitle = document.createElement("p");
-        placeTitle.classList = "title is-4";
+        placeTitle.classList = "title is-4 p-10";
         placeTitle.textContent = placesArray[i].name;
 
         // create a description for each card
         var placeText = document.createElement("p");
-        placeText.classList = "description ellipsis ellipsis";
+        placeText.classList = "description ellipsis ellipsis p-10";
         placeText.textContent = placesArray[i].wikipedia_extracts.text;
-        
+       
         // create a card footer with save and more buttons
         var footerCard = document.createElement("div");
         var footer = document.createElement("footer");
         var saveBtn = document.createElement("a");
         var moreBtn = document.createElement("a");
-        footerCard.classList = "card";
+        footerCard.classList = "card br-0";
         footer.classList = "card-footer";
         saveBtn.classList = "card-footer-item";
         moreBtn.classList = "card-footer-item";
