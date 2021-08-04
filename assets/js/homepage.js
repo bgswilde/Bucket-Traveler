@@ -28,7 +28,7 @@ var getPlaces = function(searchCity) {
         .then(response => (response.json())
             // take coordinates from previous fetch data to get places array
         .then(data => {
-            fetch("https://api.opentripmap.com/0.1/en/places/radius?radius=35000&lon=" + data.features[0].properties.lon + "&lat=" + data.features[0].properties.lat + "&rate=3&kinds=natural&limit=10&format=json&apikey=" + apiKey)
+            fetch("https://api.opentripmap.com/0.1/en/places/radius?radius=50000&lon=" + data.features[0].properties.lon + "&lat=" + data.features[0].properties.lat + "&rate=3&kinds=natural&limit=10&format=json&apikey=" + apiKey)
                 .then(response => (response.json())
                 .then(data => {
                     // for loop to push data to placesArray
