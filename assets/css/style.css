@@ -1,5 +1,10 @@
+:root {
+    --primary-color: #229ebf;
+    --secondary-color: #464655; 
+}
+
 .hero {
-    background-image: url('images\pexels-pixabay-210186.jpg');
+    background-image: url(../images/pexels-pixabay-210186.jpg);
     background-color: aquamarine;
     justify-content: center;
     align-items: center;
@@ -33,29 +38,4 @@
         width: 100%;
         max-width: 300px;
         display: inline-flex;
-       
-
-
-    }
-    .searchinp {
-        flex-grow: 1;
-        padding: 10px;
-        border: 2px solid black;
-        border-radius: 5px 0 0 5px;
-        background: #229ebf;
-       
-    }
-        
-       
-    .searchbtn{
-        width: 40px;
-        background-color: #229ebf;
-        border-radius: 0 5px 5px 0;
-        border: 2px solid black;
-    }
-
-    
-
-   
-
-    
+     }
