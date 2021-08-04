@@ -1,85 +1,93 @@
 :root {
-    --primary-color: #229ebf;
-    --secondary-color: #464655; 
+    --primary-color  : #229ebf;
+    --secondary-color: #464655;
 }
 
 .hero {
-    background-image: url(../images/pexels-pixabay-210186.jpg);
-    background-color: aquamarine;
-    justify-content: center;
-    align-items: center;
-    background-size: cover;
-    overflow: visible;
-    display: flex;
-    flex-wrap: wrap;  
+    background-image     : url(../images/pexels-pixabay-210186.jpg);
+    background-color     : aquamarine;
+    justify-content      : center;
+    align-items          : center;
+    background-size      : cover;
+    overflow             : visible;
+    display              : flex;
+    flex-wrap            : wrap;
     background-attachment: fixed;
-    background-position: 80%;
-    height: 500px;
-    margin-bottom: 20px;
-    
-   
+    background-position  : 80%;
+    height               : 500px;
+    margin-bottom        : 20px;
+
+
 }
-.hero-content{
+
+.hero-content {
     justify-content: center;
-    align-items: center;
+    align-items    : center;
 }
 
 
-    img{
-        height: 200px;
-        width: 300px;
-        border-radius: 20px;
-        justify-content: center;
-        align-items: baseline;
-       
-    }
+img {
+    height         : 200px;
+    width          : 300px;
+    /*border-radius  : 20px;*/
+    justify-content: center;
+    align-items    : baseline;
 
-     .searchbar{ 
-        width: 100%;
-        max-width: 300px;
-        display: inline-flex;
-       
+}
+
+.searchbar {
+    width    : 100%;
+    max-width: 300px;
+    display  : inline-flex;
 
 
-    }
-    .searchinp {
-        flex-grow: 1;
-        padding: 10px;
-        border: 2px solid var(--secondary-color);
-        border-radius: 5px 0 0 5px;
-        background-color: white;
-       
-    }
-        
-       
-    .searchbtn{
-        width: 40px;
-        background-color: white;
-        border-radius: 0 5px 5px 0;
-        border: 2px solid var(--secondary-color);
-    }
+
+}
+
+.searchinp {
+    flex-grow       : 1;
+    padding         : 10px;
+    border          : 2px solid var(--secondary-color);
+    border-radius   : 5px 0 0 5px;
+    background-color: white;
+
+}
+
+
+.searchbtn {
+    width           : 40px;
+    background-color: white;
+    border-radius   : 0 5px 5px 0;
+    border          : 2px solid var(--secondary-color);
+}
+
 #attractions {
-margin-left: 50px;
-margin-right: 50px;
-background-color: #7065ab;
+    margin-left     : 50px;
+    margin-right    : 50px;
+    background-color: #7065ab;
 }
 
 #saved-attractions {
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left     : 50px;
+    margin-right    : 50px;
     background-color: #e6c9d1;
-    }
+}
+
 .ellipsis {
-    overflow:hidden; 
-    white-space: nowrap;
+    overflow     : hidden;
+    white-space  : nowrap;
     text-overflow: ellipsis;
 }
 
 #saved-title {
-    margin-top: 40px;
+    margin-top   : 40px;
     margin-bottom: 50px;
 }
 
 .searchbtn:hover {
     background: var(--primary-color);
+}
+
+.p-10 {
+padding: 5px;
 }
