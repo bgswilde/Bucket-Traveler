@@ -6,36 +6,352 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bucket Traveler</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
-    <!--header container w/ images-->
-    <header>
-        <figure class="image is-128x128">
-            <img src="./assets/images/pin.jpg" alt="map with pins in it">
-            <img src="./assets/images/map.jpg" alt="women holding map">
-            <img src="./assets/images/logo.jpg" alt="bucket traveler logo">
-            <img src="./assets/images/globe.jpg" alt="globe">
-        </figure>
-    </header>
+    <!--begin hero-->
+    <section class="hero">
 
-    <!--for search bar-->
-    <div class="search-bar">
-        <button class="button">Search</button>
-    </div>
+        <div class="hero-content">
 
-    <!--holds all the bucket containers within the one container-->
-    <section class="bucket-holder">
-        <div class="food-bucket"></div>
-        <div class="attraction-bucket"></div>
-        <div class="flightsbucket"></div>
+            <h1 class="hero-title">
+                <img src="./assets/images/logo blue.png"
+                    alt=" pencil drawing of mountians with text of bucket traveler and slogan of travel with us">
+            </h1>
+            <form id="search-element" class="searchbar">
+                <input id="enter-city" type="text" class="searchinp" name="search"
+                    placeholder="Search Location to Find Attractions">
+                <button id="search-button" type="submit" class="searchbtn">
+                    <i class="material-icons">search</i>
+                </button>
+            </form>
+        </div>
     </section>
 
-    <!--for saved location/bucket list container-->
-    <div class="saved-location">
-        <button class="button">Clear List</button>
-    </div>
+
+    <section id="attractions" class="containter columns is-multiline attractions-row-container hidded">
+
+        <div
+            class="column is-full-mobile is-one-quarters-tablet is-one-quarter-desktop is-one-fourth-widescreen is-one-fourth-fullhd">
+            <div class="card br-0">
+                <figure class="image is-4by3">
+                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                </figure>
+                <div class="p-10">
+                    <p class="title is-4 mgl">Sample Card</p>
+                    <p class="description ellipsis ellipsis">sample description ellipsis text.</p>
+                    <p class=website class="subtitle is-6">website</p>
+                </div>
+            </div>
+            <div class="card br-0">
+                <footer  id="save-place" class="card-footer">
+                    <a href="#" class="card-footer-item">Save</a>
+                </footer>
+            </div>
+        </div>
+
+        <div
+            class="column is-full-mobile is-one-quarters-tablet is-one-quarter-desktop is-one-fourth-widescreen is-one-fourth-fullhd">
+            <div class="card br-0">
+                <figure class="image is-4by3">
+                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                </figure>
+                <div class="p-10">
+                    <p class="title is-4 mgl">Sample Card</p>
+                    <p class="description ellipsis ellipsis">sample description ellipsis text.</p>
+                    <p class=website class="subtitle is-6">website</p>
+                </div>
+            </div>
+            <div class="card br-0">
+                <footer class="card-footer">
+                    <a href="#" class="card-footer-item">Save</a>
+                </footer>
+            </div>
+        </div>
+
+        <div
+            class="column is-full-mobile is-one-quarters-tablet is-one-quarter-desktop is-one-fourth-widescreen is-one-fourth-fullhd">
+            <div class="card br-0">
+                <figure class="image is-4by3">
+                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                </figure>
+                <div class="p-10">
+                    <p class="title is-4 mgl">Sample Card</p>
+                    <p class="description ellipsis ellipsis">sample description ellipsis text.</p>
+                    <p class=website class="subtitle is-6">website</p>
+                </div>
+            </div>
+            <div class="card br-0">
+                <footer class="card-footer">
+                    <a href="#" class="card-footer-item">Save</a>
+                </footer>
+            </div>
+        </div>
+
+        <div
+            class="column is-full-mobile is-one-quarters-tablet is-one-quarter-desktop is-one-fourth-widescreen is-one-fourth-fullhd">
+            <div class="card br-0">
+                <figure class="image is-4by3">
+                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                </figure>
+                <div class="p-10">
+                    <p class="title is-4 mgl">Sample Card</p>
+                    <p class="description ellipsis ellipsis">sample description ellipsis text.</p>
+                    <p class=website class="subtitle is-6">website</p>
+                </div>
+            </div>
+            <div class="card br-0">
+                <footer class="card-footer">
+                    <a href="#" class="card-footer-item">Save</a>
+                </footer>
+            </div>
+        </div>
+
+        <div
+            class="column is-full-mobile is-one-quarters-tablet is-one-quarter-desktop is-one-fourth-widescreen is-one-fourth-fullhd">
+            <div class="card br-0">
+                <figure class="image is-4by3">
+                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                </figure>
+                <div class="p-10">
+                    <p class="title is-4 mgl">Sample Card</p>
+                    <p class="description ellipsis ellipsis">sample description ellipsis text.</p>
+                    <p class=website class="subtitle is-6">website</p>
+                </div>
+            </div>
+            <div class="card br-0">
+                <footer class="card-footer">
+                    <a href="#" class="card-footer-item">Save</a>
+                </footer>
+            </div>
+        </div>
+
+        <div
+            class="column is-full-mobile is-one-quarters-tablet is-one-quarter-desktop is-one-fourth-widescreen is-one-fourth-fullhd">
+            <div class="card br-0">
+                <figure class="image is-4by3">
+                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                </figure>
+                <div class="p-10">
+                    <p class="title is-4 mgl">Sample Card</p>
+                    <p class="description ellipsis ellipsis">sample description ellipsis text.</p>
+                    <p class=website class="subtitle is-6">website</p>
+                </div>
+            </div>
+            <div class="card br-0">
+                <footer class="card-footer">
+                    <a href="#" class="card-footer-item">Save</a>
+                </footer>
+            </div>
+        </div>
+
+        <div
+            class="column is-full-mobile is-one-quarters-tablet is-one-quarter-desktop is-one-fourth-widescreen is-one-fourth-fullhd">
+            <div class="card br-0">
+                <figure class="image is-4by3">
+                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                </figure>
+                <div class="p-10">
+                    <p class="title is-4 mgl">Sample Card</p>
+                    <p class="description ellipsis ellipsis">sample description ellipsis text.</p>
+                    <p class=website class="subtitle is-6">website</p>
+                </div>
+            </div>
+            <div class="card br-0">
+                <footer class="card-footer">
+                    <a href="#" class="card-footer-item">Save</a>
+                </footer>
+            </div>
+        </div>
+
+        <div
+            class="column is-full-mobile is-one-quarters-tablet is-one-quarter-desktop is-one-fourth-widescreen is-one-fourth-fullhd">
+            <div class="card br-0">
+                <figure class="image is-4by3">
+                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                </figure>
+                <div class="p-10">
+                    <p class="title is-4 mgl">Sample Card</p>
+                    <p class="description ellipsis ellipsis">sample description ellipsis text.</p>
+                    <p class=website class="subtitle is-6">website</p>
+                </div>
+            </div>
+            <div class="card br-0">
+                <footer class="card-footer">
+                    <a href="#" class="card-footer-item">Save</a>
+                </footer>
+            </div>
+        </div>
+
+        <div
+            class="column is-full-mobile is-one-quarters-tablet is-one-quarter-desktop is-one-fourth-widescreen is-one-fourth-fullhd">
+            <div class="card br-0">
+                <figure class="image is-4by3">
+                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                </figure>
+                <div class="p-10">
+                    <p class="title is-4 mgl">Sample Card</p>
+                    <p class="description ellipsis ellipsis">sample description ellipsis text.</p>
+                    <p class=website class="subtitle is-6">website</p>
+                </div>
+            </div>
+            <div class="card br-0">
+                <footer class="card-footer">
+                    <a href="#" class="card-footer-item">Save</a>
+                </footer>
+            </div>
+        </div>
+
+        <div
+            class="column is-full-mobile is-one-quarters-tablet is-one-quarter-desktop is-one-fourth-widescreen is-one-fourth-fullhd">
+            <div class="card br-0">
+                <figure class="image is-4by3">
+                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                </figure>
+                <div class="p-10">
+                    <p class="title is-4 mgl">Sample Card</p>
+                    <p class="description ellipsis ellipsis">sample description ellipsis text.</p>
+                    <p class=website class="subtitle is-6">website</p>
+                </div>
+            </div>
+            <div class="card br-0">
+                <footer class="card-footer">
+                    <a href="#" class="card-footer-item">Save</a>
+                </footer>
+            </div>
+        </div>
+
+        <div
+            class="column is-full-mobile is-one-quarters-tablet is-one-quarter-desktop is-one-fourth-widescreen is-one-fourth-fullhd">
+            <div class="card br-0">
+                <figure class="image is-4by3">
+                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                </figure>
+                <div class="p-10">
+                    <p class="title is-4 mgl">Sample Card</p>
+                    <p class="description ellipsis ellipsis">sample description ellipsis text.</p>
+                    <p class=website class="subtitle is-6">website</p>
+                </div>
+            </div>
+            <div class="card br-0">
+                <footer class="card-footer">
+                    <a href="#" class="card-footer-item">Save</a>
+                </footer>
+            </div>
+        </div>
+
+        <div
+            class="column is-full-mobile is-one-quarters-tablet is-one-quarter-desktop is-one-fourth-widescreen is-one-fourth-fullhd">
+            <div class="card br-0">
+                <figure class="image is-4by3">
+                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                </figure>
+                <div class="p-10">
+                    <p class="title is-4 mgl">Sample Card</p>
+                    <p class="description ellipsis ellipsis">sample description ellipsis text.</p>
+                    <p class=website class="subtitle is-6">website</p>
+                </div>
+            </div>
+            <div class="card br-0">
+                <footer class="card-footer">
+                    <a href="#" class="card-footer-item">Save</a>
+                </footer>
+            </div>
+        </div>
+    </section>
+
+    <section id="saved-title" class="hidded">
+        <div class="has-text-centered">
+            <h2 class="title is-4"> My Saved Bucket Traveller List </h2>
+        </div>
+    </section>
+    <section id="saved-attractions" class="containter columns is-multiline attractions-row-container hidded">
+
+        <div
+            class="column is-full-mobile is-one-quarters-tablet is-one-quarter-desktop is-one-fourth-widescreen is-one-fourth-fullhd">
+            <div class="card br-0">
+                <figure class="image is-4by3">
+                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                </figure>
+                <div class="p-10">
+                    <p class="title is-4 mgl">Sample Card</p>
+                    <p class="description ellipsis ellipsis">sample description ellipsis text.</p>
+                    <p class=website class="subtitle is-6">website</p>
+                </div>
+            </div>
+            <div class="card br-0">
+                <footer class="card-footer">
+                    <a href="#" class="card-footer-item">Save</a>
+                    <a href="#" class="card-footer-item">Delete</a>
+                </footer>
+            </div>
+        </div>
+
+        <div
+            class="column is-full-mobile is-one-quarters-tablet is-one-quarter-desktop is-one-fourth-widescreen is-one-fourth-fullhd">
+            <div class="card br-0">
+                <figure class="image is-4by3">
+                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                </figure>
+                <div class="p-10">
+                    <p class="title is-4 mgl">Sample Card</p>
+                    <p class="description ellipsis ellipsis">sample description ellipsis text.</p>
+                    <p class=website class="subtitle is-6">website</p>
+                </div>
+            </div>
+            <div class="card br-0">
+                <footer class="card-footer">
+                    <a href="#" class="card-footer-item">Save</a>
+                    <a href="#" class="card-footer-item">Delete</a>
+                </footer>
+            </div>
+        </div>
+
+        <div
+            class="column is-full-mobile is-one-quarters-tablet is-one-quarter-desktop is-one-fourth-widescreen is-one-fourth-fullhd">
+            <div class="card br-0">
+                <figure class="image is-4by3">
+                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                </figure>
+                <div class="p-10">
+                    <p class="title is-4 mgl">Sample Card</p>
+                    <p class="description ellipsis ellipsis">sample description ellipsis text.</p>
+                    <p class=website class="subtitle is-6">website</p>
+                </div>
+            </div>
+            <div class="card br-0">
+                <footer class="card-footer">
+                    <a href="#" class="card-footer-item">Save</a>
+                    <a href="#" class="card-footer-item">Delete</a>
+                </footer>
+            </div>
+        </div>
+
+        <div
+            class="column is-full-mobile is-one-quarters-tablet is-one-quarter-desktop is-one-fourth-widescreen is-one-fourth-fullhd">
+            <div class="card br-0">
+                <figure class="image is-4by3">
+                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                </figure>
+                <div class="p-10">
+                    <p class="title is-4 mgl">Sample Card</p>
+                    <p class="description ellipsis ellipsis">sample description ellipsis text.</p>
+                    <p class=website class="subtitle is-6">website</p>
+                </div>
+            </div>
+            <div class="card br-0">
+                <footer class="card-footer">
+                    <a href="#" class="card-footer-item">Save</a>
+                    <a id="delete-item" href="#" class="card-footer-item">Delete</a>
+                </footer>
+            </div>
+        </div>
+        
+    </section>
+    <script src="./assets/js/homepage.js"></script>
 </body>
 
 </html>
