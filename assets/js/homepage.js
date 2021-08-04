@@ -28,12 +28,12 @@ var getPlaces = function(searchCity) {
         .then(response => (response.json())
             // take coordinates from previous fetch data to get places array
         .then(data => {
-            fetch("https://api.opentripmap.com/0.1/en/places/radius?radius=50000&lon=" + data.features[0].properties.lon + "&lat=" + data.features[0].properties.lat + "&rate=3&kinds=natural&limit=10&format=json&apikey=" + apiKey)
+            fetch("https://api.opentripmap.com/0.1/en/places/radius?radius=50000&lon=" + data.features[0].properties.lon + "&lat=" + data.features[0].properties.lat + "&rate=3&kinds=natural&limit=12&format=json&apikey=" + apiKey)
                 .then(response => (response.json())
                 .then(data => {
                     // for loop to push data to placesArray
                     // console.log(data)
-                    for (var i = 0; i < 10; i++) {
+                    for (var i = 0; i < data.length; i++) {
                         // fetch call using xid for more data
                         fetch("https://api.opentripmap.com/0.1/en/places/xid/" + data[i].xid + "?apikey=" + apiKey2)
                         // push into the array
@@ -54,7 +54,7 @@ var createCards = function() {
     for (var i = 0; i < placesArray.length; i++) {
         // create a column div to hold the card
         var columnDiv = document.createElement("div");
-        columnDiv.classList = "column is-one-fifth";
+        columnDiv.classList = "column is-full-mobile is-one-quarters-tablet is-one-quarter-desktop is-one-fourth-widescreen is-one-fourth-fullhd";
         cardContainer.appendChild(columnDiv);
 
         // create a card to hold data
@@ -77,18 +77,24 @@ var createCards = function() {
 
         // create a description for each card
         var placeText = document.createElement("p");
-        placeText.classList = "description";
+        placeText.classList = "description ellipsis ellipsis";
         placeText.textContent = placesArray[i].wikipedia_extracts.text;
         
         // create a card footer with save and more buttons
+        var footerCard = document.createElement("div");
         var footer = document.createElement("footer");
         var saveBtn = document.createElement("a");
         var moreBtn = document.createElement("a");
+        footerCard.classList = "card";
         footer.classList = "card-footer";
         saveBtn.classList = "card-footer-item";
         moreBtn.classList = "card-footer-item";
+        saveBtn.textContent = "Save";
         saveBtn.setAttribute("href", "#");
-        moreBtn.setAttribute("href", "#");
+        moreBtn.setAttribute("href", placesArray[i].wikipedia);
+        moreBtn.textContent = "More";
+        moreBtn.setAttribute("target", "_blank");
+        footerCard.appendChild(footer);
         footer.appendChild(saveBtn);
         footer.appendChild(moreBtn);
 
@@ -96,7 +102,7 @@ var createCards = function() {
         placeCard.appendChild(placeImage);
         placeCard.appendChild(placeTitle); 
         placeCard.appendChild(placeText);
-        placeCard.appendChild(footer);
+        columnDiv.appendChild(footerCard);
     }
 };
         
