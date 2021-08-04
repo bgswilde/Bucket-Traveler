@@ -3,9 +3,14 @@ var apiKey2 = "5ae2e3f221c38a28845f05b6a749653163ddad9adc28cbe035c9fa5e";
 var placesArray = [];
 var cardContainer = document.getElementById("attractions");
 var searchEl = document.getElementById("search-element");
-var city = document.getElementById("enter-city");
-let searchHistory = JSON.parse(localStorage.getItem("searchBtn")) || [];
 var sectionCards = document.getElementById("attractions");
+const city = document.getElementById("enter-city");
+const save = document.getElementById("save-place");
+let saveHistory = JSON.parse(localStorage.getItem("save")) || [];
+const history = document.getElementById("history");
+const clearSave = document.getElementById("delete-item");
+const pageLength = 5;
+let offset = 0;
 
 var searchSubmitHandler = function (event) {
     // prevent page from refreshing
@@ -110,21 +115,48 @@ var getPlaces = function (searchCity) {
 
     };
 
+    // Get history
+    save.addEventListener("click", function () {
+        const saveTerm = city.value;
+        getPlaces(saveTerm);
+        saveHistory.push(saveTerm);
+        localStorage.setItem("search", JSON.stringify(saveHistory));
+        callSaveHistory();
+    })
 
-    // //Get history
-    // search.addEventListener("click", function () {
-    //     const searchTerm = city.value;
-    //     getPlaces(searchTerm);
-    //     searchHistory.push(searchTerm);
-    //     localStorage.setItem("searchBtn", JSON.stringify(searchHistory));
-    // })
+    // Clear History
+    clearSave.addEventListener("click", function () {
+        localStorage.clear();
+        searchHistory = [];
+        callSaveHistory();
+    })
 
-    // if (searchHistory.length > 0) {
-    //     getPlaces(searchHistory[searchHistory.length - 1]);
-    // }
+    function callSaveHistory() {
+        history.innerHTML = "";
+        for (let i = 0; i < saveHistory.length; i++) {
+            const saveItem = document.createElement("input");
+            saveItem.setAttribute("type", "text");
+            saveItem.setAttribute("readonly", true);
+            saveItem.setAttribute("class", "");
+            saveItem.setAttribute("value", searchHistory[i]);
+            saveItem.addEventListener("click", function () {
+                getPlaces(saveItem.value);
+            })
+            history.append(saveItem);
+        }
+    }
+
+    callSaveHistory();
+    if (saveHistory.length > 0) {
+        getPlaces(saveHistory[saveHistory.length - 1]);
+    }
+
+    /*document.getElementById("next_button").addEventListener("click", function () {
+            offset += pageLength;
+            loadList();
+        });*/
 }
 
-// getPlaces();
 // event listeners
 searchEl.addEventListener("submit", searchSubmitHandler);
 
