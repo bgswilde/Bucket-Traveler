@@ -15,11 +15,10 @@ var searchSubmitHandler = function(event) {
 
     if (cityName) {
         getPlaces(cityName);
-
-    } else {
-        alert("Search invalid. Check your spelling, and avoid small or fictional cities");
     }
+    // city.value = "";
 };
+
 
 var getPlaces = function(searchCity) {
     // clear array
@@ -42,15 +41,15 @@ var getPlaces = function(searchCity) {
                         .then(data => {
                             console.log(data)
                             placesArray.push(data)
-                            return;
+                            return placesArray;
                         })
                     };
-                    createCards()
+                    setTimeout(createCards, 1800);
                 }))
-                
         }))
 
-var createCards = function(placesArray) {
+var createCards = function() {
+    cardContainer.innerHTML = "";
     console.log("this was reached");
     for (var i = 0; i < placesArray.length; i++) {
         // create a column div to hold the card
@@ -62,19 +61,19 @@ var createCards = function(placesArray) {
         var placeCard = document.createElement("div");
         placeCard.classList = "card";
         columnDiv.appendChild(placeCard);
+        
+        // create an image for each card
+        var placeImage = document.createElement("figure");
+        var imageData = document.createElement("img");
+        placeImage.classList = "image is-4by3";
+        imageData.setAttribute("src", placesArray[i].preview.source);
+        imageData.setAttribute("alt", "image showing a view of " + placesArray[i].name + "");
+        placeImage.appendChild(imageData);
 
         // create a title for each card
         var placeTitle = document.createElement("p");
         placeTitle.classList = "title is-4";
         placeTitle.textContent = placesArray[i].name;
-
-        // create an image for each card
-        var placeImage = document.createElement("figure");
-        var imageData = document.createElement("img");
-        placeImage.classList = "image is-4by3";
-        imageData.setAttribute("src", "'" + placesArray[i].preview.source + "'");
-        imageData.setAttribute("alt", "‘image showing a view of " + placesArray[i].name + "'");
-        placeImage.appendChild(imageData);
 
         // create a description for each card
         var placeText = document.createElement("p");
@@ -93,16 +92,13 @@ var createCards = function(placesArray) {
         footer.appendChild(saveBtn);
         footer.appendChild(moreBtn);
 
-
         // append children to card
-        placeCard.appendChild(placeTitle); 
         placeCard.appendChild(placeImage);
+        placeCard.appendChild(placeTitle); 
         placeCard.appendChild(placeText);
         placeCard.appendChild(footer);
-      
     }
 };
-
         
 
         // //Get history
