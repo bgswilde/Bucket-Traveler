@@ -6,14 +6,16 @@ var cardContainer = document.getElementById("attractions");
 var searchEl = document.getElementById("search-element");
 var sectionCards = document.getElementById("attractions");
 var welcome = document.getElementById("welcome");
- var searchHeading = document.getElementById("search-heading");
- var waitText = document.getElementById("wait");
+var searchHeading = document.getElementById("search-heading");
+var waitText = document.getElementById("wait");
 const city = document.getElementById("enter-city");
 const search = document.getElementById("search-button");
 const clearSearch = document.getElementById("clear-history");
 let searchHistory = JSON.parse(localStorage.getItem("search"));
 const history = document.getElementById("history");
 var sectionLabel = document.getElementById("text-label");
+var myList = document.getElementById("label");
+var deleteList = document.getElementById("dlist");
 
 var searchSubmitHandler = function (event) {
     // prevent page from refreshing
@@ -37,6 +39,7 @@ var getPlaces = function (searchCity) {
     searchHeading.classList = "title is-3";
     searchHeading.textContent = "showing results for " + searchCity;
     waitText.removeAttribute("class", "hidden");
+    myList.textContent = "My Saved Bucket Traveller List";
 
     // fetch the city name from search to get coordinates(fix link below to reflect)
     fetch("https://api.geoapify.com/v1/geocode/search?text=" + searchCity + "&lang=en&limit=1&type=city&apiKey=5f14cd024f004280af18302ff6db6a1f")
@@ -132,7 +135,7 @@ var getPlaces = function (searchCity) {
         }
 
         sectionCards.classList.remove("hidden");
-
+        myList.classList.remove("hidden");
     };
 }
 
