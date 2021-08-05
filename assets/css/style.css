@@ -104,9 +104,26 @@ img {
     padding: 5px;
 }
 
-.hidded {
+.m-20 {
+    margin: 20px;
+}
+.hidden {
     display: none !important;
 }
+
+.results-header {
+    color: white;
+    background-color: rgb(112 101 169);
+    text-align: center;
+}
+
+.results-header p {
+    color: white;
+    font-style: italic;
+    align-content: center;
+    margin: 0;
+    padding: 0;
+} 
 
 .br-0 {
     border-radius: 0;
