@@ -115,6 +115,7 @@ img {
     color: white;
     background-color: rgb(112 101 169);
     text-align: center;
+    margin-bottom: 20px;
 }
 
 .results-header p {
