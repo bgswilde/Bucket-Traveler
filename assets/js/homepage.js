@@ -4,6 +4,9 @@ var placesArray = [];
 var cardContainer = document.getElementById("attractions");
 var searchEl = document.getElementById("search-element");
 var sectionCards = document.getElementById("attractions");
+var welcome = document.getElementById("welcome");
+var searchHeading = document.getElementById("search-heading");
+var waitText = document.getElementById("wait");
 const city = document.getElementById("enter-city");
 const save = document.getElementById("save-place");
 let saveHistory = JSON.parse(localStorage.getItem("save")) || [];
@@ -29,6 +32,13 @@ var searchSubmitHandler = function (event) {
 var getPlaces = function (searchCity) {
     // clear array
     placesArray = [];
+
+    // display search heading and hide welcome message
+    welcome.classList = "hidden";
+    searchHeading.classList = "title is-3";
+    searchHeading.textContent = "showing results for " + searchCity;
+    waitText.removeAttribute("class", "hidden");
+
     // fetch the city name from search to get coordinates(fix link below to reflect)
     fetch("https://api.geoapify.com/v1/geocode/search?text=" + searchCity + "&lang=en&limit=1&type=city&apiKey=5f14cd024f004280af18302ff6db6a1f")
         .then(response => (response.json())
@@ -55,8 +65,16 @@ var getPlaces = function (searchCity) {
             }))
 
     var createCards = function () {
-        cardContainer.innerHTML = "";
         console.log("this was reached");
+
+        // remove old results
+        cardContainer.innerHTML = "";
+        
+        
+        // remove waiting message
+        waitText.classList = "hidden";
+        
+        // loop through the array and display cards
         for (var i = 0; i < placesArray.length; i++) {
             // create a column div to hold the card
             var columnDiv = document.createElement("div");
@@ -111,7 +129,7 @@ var getPlaces = function (searchCity) {
             columnDiv.appendChild(footerCard);
         }
 
-        sectionCards.classList.remove("hidded");
+        sectionCards.classList.remove("hidden");
 
     };
 

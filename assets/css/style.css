@@ -93,7 +93,7 @@ img {
 padding: 5px;
 }
 
-.hidded {
+.hidden {
     display: none!important;
 }
 .br-0 {
@@ -102,3 +102,17 @@ padding: 5px;
 .card-h {
     height: 411.5px;
 }
+
+.results-header {
+    color: white;
+    background-color: rgb(112 101 169);
+    text-align: center;
+}
+
+.results-header p {
+    color: white;
+    font-style: italic;
+    align-content: center;
+    margin: 0;
+    padding: 0;
+} 
