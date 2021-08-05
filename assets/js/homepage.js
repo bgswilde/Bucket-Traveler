@@ -1,3 +1,4 @@
+
 var apiKey = "5ae2e3f221c38a28845f05b69ebaab9667831cd14bd320fe563efa88";
 var apiKey2 = "5ae2e3f221c38a28845f05b6a749653163ddad9adc28cbe035c9fa5e";
 var placesArray = [];
@@ -5,12 +6,11 @@ var cardContainer = document.getElementById("attractions");
 var searchEl = document.getElementById("search-element");
 var sectionCards = document.getElementById("attractions");
 const city = document.getElementById("enter-city");
-const save = document.getElementById("save-place");
-let saveHistory = JSON.parse(localStorage.getItem("save")) || [];
+const search = document.getElementById("search-button");
+const clearSearch = document.getElementById("clear-history");
+let searchHistory = JSON.parse(localStorage.getItem("search"));
 const history = document.getElementById("history");
-const clearSave = document.getElementById("delete-item");
-const pageLength = 5;
-let offset = 0;
+var sectionLabel = document.getElementById("text-label");
 
 var searchSubmitHandler = function (event) {
     // prevent page from refreshing
@@ -24,7 +24,6 @@ var searchSubmitHandler = function (event) {
     }
     // city.value = "";
 };
-
 
 var getPlaces = function (searchCity) {
     // clear array
@@ -50,7 +49,7 @@ var getPlaces = function (searchCity) {
                                         return placesArray;
                                     })
                             };
-                            setTimeout(createCards, 2200);
+                            setTimeout(createCards, 1000);
                         }))
             }))
 
@@ -72,31 +71,35 @@ var getPlaces = function (searchCity) {
             var placeImage = document.createElement("figure");
             var imageData = document.createElement("img");
             placeImage.classList = "image is-4by3";
+            imageData.setAttribute("id", "img");
             imageData.setAttribute("src", placesArray[i].preview.source);
             imageData.setAttribute("alt", "image showing a view of " + placesArray[i].name + "");
             placeImage.appendChild(imageData);
 
             // create a title for each card
             var placeTitle = document.createElement("p");
+            placeTitle.setAttribute("id", "p-title");
             placeTitle.classList = "title is-4 p-10";
             placeTitle.textContent = placesArray[i].name;
 
             // create a description for each card
             var placeText = document.createElement("p");
+            placeText.setAttribute("id", "p-text");
             placeText.classList = "description ellipsis ellipsis p-10";
             placeText.textContent = placesArray[i].wikipedia_extracts.text;
 
             // create a card footer with save and more buttons
             var footerCard = document.createElement("div");
             var footer = document.createElement("footer");
-            var saveBtn = document.createElement("a");
+            var saveBtn = document.createElement("button");
             var moreBtn = document.createElement("a");
             footerCard.classList = "card br-0";
             footer.classList = "card-footer";
-            saveBtn.classList = "card-footer-item";
-            moreBtn.classList = "card-footer-item";
+            saveBtn.classList = "card-footer-item btn2";
+            moreBtn.classList = "card-footer-item btn2";
             saveBtn.textContent = "Save";
-            saveBtn.setAttribute("href", "#");
+            saveBtn.setAttribute("id", "save-button");
+            //saveBtn.setAttribute("href", "#");
             moreBtn.setAttribute("href", placesArray[i].wikipedia);
             moreBtn.textContent = "More";
             moreBtn.setAttribute("target", "_blank");
@@ -114,50 +117,46 @@ var getPlaces = function (searchCity) {
         sectionCards.classList.remove("hidded");
 
     };
+}
 
-    // Get history
-    save.addEventListener("click", function () {
-        const saveTerm = city.value;
-        getPlaces(saveTerm);
-        saveHistory.push(saveTerm);
-        localStorage.setItem("search", JSON.stringify(saveHistory));
-        callSaveHistory();
-    })
 
-    // Clear History
-    clearSave.addEventListener("click", function () {
-        localStorage.clear();
-        searchHistory = [];
-        callSaveHistory();
-    })
+// Get history
+search.addEventListener("click", function () {
+    const searchTerm = city.value;
+    getPlaces(searchTerm);
+    searchHistory.push(searchTerm);
+    localStorage.setItem("search", JSON.stringify(searchHistory));
+    callSearchHistory();
+})
 
-    function callSaveHistory() {
-        history.innerHTML = "";
-        for (let i = 0; i < saveHistory.length; i++) {
-            const saveItem = document.createElement("input");
-            saveItem.setAttribute("type", "text");
-            saveItem.setAttribute("readonly", true);
-            saveItem.setAttribute("class", "");
-            saveItem.setAttribute("value", searchHistory[i]);
-            saveItem.addEventListener("click", function () {
-                getPlaces(saveItem.value);
-            })
-            history.append(saveItem);
-        }
+// Clear History
+clearSearch.addEventListener("click", function () {
+    localStorage.clear();
+    searchHistory = [];
+    callSearchHistory();
+
+})
+
+function callSearchHistory() {
+    history.innerHTML = "";
+    for (let i = 0; i < searchHistory.length; i++) {
+        const historyItem = document.createElement("input");
+        historyItem.setAttribute("type", "text");
+        historyItem.setAttribute("readonly", true);
+        historyItem.setAttribute("class", "btn");
+        historyItem.setAttribute("value", searchHistory[i]);
+        historyItem.addEventListener("click", function () {
+            getPlaces(historyItem.value);
+        })
+        history.append(historyItem);
     }
+    sectionLabel.classList.remove("hidded");
+}
 
-    callSaveHistory();
-    if (saveHistory.length > 0) {
-        getPlaces(saveHistory[saveHistory.length - 1]);
-    }
-
-    /*document.getElementById("next_button").addEventListener("click", function () {
-            offset += pageLength;
-            loadList();
-        });*/
+callSearchHistory();
+if (searchHistory.length > 0) {
+    getPlaces(searchHistory[searchHistory.length - 1]);
 }
 
 // event listeners
 searchEl.addEventListener("submit", searchSubmitHandler);
-
-// testing new push develop
