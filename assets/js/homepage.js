@@ -11,11 +11,13 @@ var waitText = document.getElementById("wait");
 const city = document.getElementById("enter-city");
 const search = document.getElementById("search-button");
 const clearSearch = document.getElementById("clear-history");
-let searchHistory = JSON.parse(localStorage.getItem("search"));
+let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
 const history = document.getElementById("history");
 var sectionLabel = document.getElementById("text-label");
 var myList = document.getElementById("label");
-var deleteList = document.getElementById("dlist");
+const save = document.getElementsByClassName("s-card");
+var saveHistory = JSON.parse(localStorage.getItem("save")) || [];
+const sHistory = document.getElementById("save-id");
 
 var searchSubmitHandler = function (event) {
     // prevent page from refreshing
@@ -26,6 +28,10 @@ var searchSubmitHandler = function (event) {
 
     if (cityName) {
         getPlaces(cityName);
+        //searchHistory.push(cityName)
+        //localStorage.setItem('search', JSON.stringify(searchHistory));
+
+        
     }
     // city.value = "";
 };
@@ -39,7 +45,6 @@ var getPlaces = function (searchCity) {
     searchHeading.classList = "title is-3";
     searchHeading.textContent = "showing results for " + searchCity;
     waitText.removeAttribute("class", "hidden");
-    myList.textContent = "My Saved Bucket Traveller List";
 
     // fetch the city name from search to get coordinates(fix link below to reflect)
     fetch("https://api.geoapify.com/v1/geocode/search?text=" + searchCity + "&lang=en&limit=1&type=city&apiKey=5f14cd024f004280af18302ff6db6a1f")
@@ -92,7 +97,11 @@ var getPlaces = function (searchCity) {
             var imageData = document.createElement("img");
             placeImage.classList = "image is-4by3";
             imageData.setAttribute("id", "img");
-            imageData.setAttribute("src", placesArray[i].preview.source);
+            if(placesArray[i].preview){
+                imageData.setAttribute("src", placesArray[i].preview.source);
+            } else  {
+                imageData.setAttribute('src', '')
+            }
             imageData.setAttribute("alt", "image showing a view of " + placesArray[i].name + "");
             placeImage.appendChild(imageData);
 
@@ -118,8 +127,10 @@ var getPlaces = function (searchCity) {
             saveBtn.classList = "card-footer-item btn2";
             moreBtn.classList = "card-footer-item btn2";
             saveBtn.textContent = "Save";
+
+            // Get saved value
+            saveBtn.setAttribute('data-name', placesArray[i].name);
             saveBtn.setAttribute("id", "save-button");
-            //saveBtn.setAttribute("href", "#");
             moreBtn.setAttribute("href", placesArray[i].wikipedia);
             moreBtn.textContent = "More";
             moreBtn.setAttribute("target", "_blank");
@@ -132,13 +143,50 @@ var getPlaces = function (searchCity) {
             placeCard.appendChild(placeTitle);
             placeCard.appendChild(placeText);
             columnDiv.appendChild(footerCard);
+
+            // onclick save, do local storage
+            saveBtn.addEventListener('click', function(evt){
+                console.log('CLICKED BUTTON')
+                console.log('THIS-->', evt.target.dataset.name)
+
+                    const saveTerm = evt.target.dataset.name;
+                    getPlaces(saveTerm);
+                    saveHistory.push(saveTerm);
+                    localStorage.setItem("save", JSON.stringify(saveHistory));
+                    callSaveHistory();
+            })
+
+            // create saved place
+            function callSaveHistory() {
+                sHistory.innerHTML = "";            
+                for (let i = 0; i < saveHistory.length; i++) {
+
+                   console.log("TEST CREATE SAVED CARD ");
+                    const saveItem = document.createElement("input");
+                    saveItem.setAttribute("type", "text");
+                    saveItem.setAttribute("readonly", true);
+                    saveItem.setAttribute("class", "btn");
+                    saveItem.setAttribute("value", saveHistory[i]);
+                    saveItem.addEventListener("click", function (evt) {
+                        getPlaces(saveItem.value);
+                    })
+                    sHistory.append(saveItem);
+                }
+            }
+            
+            callSaveHistory();
+            if (saveHistory.length > 0) {
+                getPlaces(saveHistory[saveHistory.length - 1]);
+            }
         }
 
         sectionCards.classList.remove("hidden");
-        myList.classList.remove("hidden");
+       // myList.classList.remove("hidden");
     };
 }
 
+// event listeners
+searchEl.addEventListener("submit", searchSubmitHandler);
 
 // Get history
 search.addEventListener("click", function () {
@@ -157,9 +205,13 @@ clearSearch.addEventListener("click", function () {
 
 })
 
+// create cities search
 function callSearchHistory() {
     history.innerHTML = "";
+    myList.textContent = "My Saved Bucket Traveller List";
+
     for (let i = 0; i < searchHistory.length; i++) {
+       console.log("test")
         const historyItem = document.createElement("input");
         historyItem.setAttribute("type", "text");
         historyItem.setAttribute("readonly", true);
@@ -177,5 +229,3 @@ if (searchHistory.length > 0) {
     getPlaces(searchHistory[searchHistory.length - 1]);
 }
 
-// event listeners
-searchEl.addEventListener("submit", searchSubmitHandler);
