@@ -228,4 +228,3 @@ callSearchHistory();
 if (searchHistory.length > 0) {
     getPlaces(searchHistory[searchHistory.length - 1]);
 }
-
