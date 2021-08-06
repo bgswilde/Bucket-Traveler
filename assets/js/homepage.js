@@ -176,13 +176,3 @@ callSearchHistory();
 if (searchHistory.length > 0) {
     getPlaces(searchHistory[searchHistory.length - 1]);
 }
-
-// event listeners
-<<<<<<< .merge_file_Puu5vE
-searchEl.addEventListener("submit", searchSubmitHandler);
-=======
-searchEl.addEventListener("submit", searchSubmitHandler);
-
-// testing new push develop
-// test main
->>>>>>> .merge_file_4abUMe
