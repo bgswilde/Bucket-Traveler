@@ -29,6 +29,10 @@ var searchSubmitHandler = function (event) {
 
     if (cityName) {
         getPlaces(cityName);
+        //searchHistory.push(cityName)
+        //localStorage.setItem('search', JSON.stringify(searchHistory));
+
+        
     }
 };
 
