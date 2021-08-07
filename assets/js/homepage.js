@@ -19,6 +19,41 @@ const save = document.getElementsByClassName("s-card");
 var saveHistory = JSON.parse(localStorage.getItem("save")) || [];
 const sHistory = document.getElementById("save-id");
 var deleteCard = document.getElementsByClassName("d-btn");
+var slideView = document.getElementById("gallery");
+var slideDot = document.getElementById("dot-gallery");
+
+
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+var timer = setInterval(function () {
+    slideIndex++;
+    showSlides(slideIndex);
+}, 3000);
+
+function showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("dot");
+    if (n > slides.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length }
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].className += " active";
+}
 
 var searchSubmitHandler = function (event) {
     // prevent page from refreshing
@@ -43,8 +78,10 @@ var getPlaces = function (searchCity) {
     // display search heading and hide welcome message
     welcome.classList = "hidden";
     searchHeading.classList = "title is-3";
-    searchHeading.textContent = "showing results for " + searchCity;
+    searchHeading.textContent = "Showing results for " + searchCity;
     waitText.removeAttribute("class", "hidden");
+    slideView.classList = "hidden";
+    slideDot.classList = "hidden";
 
     // fetch the city name from search to get coordinates(fix link below to reflect)
     fetch("https://api.geoapify.com/v1/geocode/search?text=" + searchCity + "&lang=en&limit=1&type=city&apiKey=5f14cd024f004280af18302ff6db6a1f")
@@ -158,7 +195,7 @@ var createCards = function () {
             const saveTerm = evt.target.dataset;
             saveHistory.push(saveTerm);
             localStorage.setItem("save", JSON.stringify(saveHistory));
-            
+
             addSaveItem();
 
         })
@@ -167,82 +204,77 @@ var createCards = function () {
     sectionCards.classList.remove("hidden");
 };
 
-// if (saveHistory.length > 0) {
-//     callSaveHistory(saveHistory[saveHistory.length - 1]);
-// }
-
 function addSaveItem() {
 
     // sHistory.innerHTML = "";
-     for (let i = saveHistory.length - 1; i < saveHistory.length; i++) {
- 
-         const saveItem = document.createElement("input");
- 
-         // create a column div to hold the card
-         var columnDiv = document.createElement("div");
-         columnDiv.classList = "column is-12-mobile is-6-tablet is-3-desktop is-3-widescreen is-3-fullhd";
-         bucketlistContainer.appendChild(columnDiv);
- 
-         // create a card to hold data
-         var placeCard = document.createElement("div");
-         placeCard.classList = "card br-0";
-         columnDiv.appendChild(placeCard);
- 
-         // create an image for each card
-         var placeImage = document.createElement("figure");
-         var imageData = document.createElement("img");
-         placeImage.classList = "image is-4by3";
-         imageData.setAttribute("id", "img");
-         if (saveHistory[i].img) {
-             imageData.setAttribute("src", saveHistory[i].img);
-         } else {
-             imageData.setAttribute('src', '')
-         }
-         imageData.setAttribute("alt", "image showing a view of " + saveHistory[i].name + "");
-         placeImage.appendChild(imageData);
- 
-         // create a title for each card
-         var placeTitle = document.createElement("p");
-         placeTitle.setAttribute("id", "p-title");
-         placeTitle.classList = "title is-4 mgl p-10";
-         placeTitle.textContent = saveHistory[i].name;
- 
-         // create a description for each card
-         var placeText = document.createElement("p");
-         placeText.setAttribute("id", "p-text");
-         placeText.classList = "description ellipsis ellipsis p-10";
-         placeText.textContent = saveHistory[i].desc;
- 
-         // create a card footer with delete and more buttons
-         var footerCard = document.createElement("div");
-         var footer = document.createElement("footer");
-         var deleteBtn = document.createElement("button");
-         var moreBtn = document.createElement("a");
-         footerCard.classList = "card br-0";
-         footer.classList = "card-footer";
-         deleteBtn.classList = "card-footer-item btn2 d-btn";
-         deleteBtn.textContent = "Delete";
-         moreBtn.classList = "card-footer-item btn2";
-         moreBtn.textContent = "More";
-         moreBtn.setAttribute("href", saveHistory[i].link);
-         moreBtn.setAttribute("target", "_blank");
-         footerCard.appendChild(footer);
-         footer.appendChild(deleteBtn);
-         footer.appendChild(moreBtn);
- 
-         // append children to card
-         placeCard.appendChild(placeImage);
-         placeCard.appendChild(placeTitle);
-         placeCard.appendChild(placeText);
-         columnDiv.appendChild(footerCard);
-     }
- }
+    for (let i = saveHistory.length - 1; i < saveHistory.length; i++) {
+
+        const saveItem = document.createElement("input");
+
+        // create a column div to hold the card
+        var columnDiv = document.createElement("div");
+        columnDiv.classList = "column is-12-mobile is-6-tablet is-3-desktop is-3-widescreen is-3-fullhd";
+        bucketlistContainer.appendChild(columnDiv);
+
+        // create a card to hold data
+        var placeCard = document.createElement("div");
+        placeCard.classList = "card br-0";
+        columnDiv.appendChild(placeCard);
+
+        // create an image for each card
+        var placeImage = document.createElement("figure");
+        var imageData = document.createElement("img");
+        placeImage.classList = "image is-4by3";
+        imageData.setAttribute("id", "img");
+        if (saveHistory[i].img) {
+            imageData.setAttribute("src", saveHistory[i].img);
+        } else {
+            imageData.setAttribute('src', '')
+        }
+        imageData.setAttribute("alt", "image showing a view of " + saveHistory[i].name + "");
+        placeImage.appendChild(imageData);
+
+        // create a title for each card
+        var placeTitle = document.createElement("p");
+        placeTitle.setAttribute("id", "p-title");
+        placeTitle.classList = "title is-4 mgl p-10";
+        placeTitle.textContent = saveHistory[i].name;
+
+        // create a description for each card
+        var placeText = document.createElement("p");
+        placeText.setAttribute("id", "p-text");
+        placeText.classList = "description ellipsis ellipsis p-10";
+        placeText.textContent = saveHistory[i].desc;
+
+        // create a card footer with delete and more buttons
+        var footerCard = document.createElement("div");
+        var footer = document.createElement("footer");
+        var deleteBtn = document.createElement("button");
+        var moreBtn = document.createElement("a");
+        footerCard.classList = "card br-0";
+        footer.classList = "card-footer";
+        deleteBtn.classList = "card-footer-item btn2 d-btn";
+        deleteBtn.textContent = "Delete";
+        moreBtn.classList = "card-footer-item btn2";
+        moreBtn.textContent = "More";
+        moreBtn.setAttribute("href", saveHistory[i].link);
+        moreBtn.setAttribute("target", "_blank");
+        footerCard.appendChild(footer);
+        footer.appendChild(deleteBtn);
+        footer.appendChild(moreBtn);
+
+        // append children to card
+        placeCard.appendChild(placeImage);
+        placeCard.appendChild(placeTitle);
+        placeCard.appendChild(placeText);
+        columnDiv.appendChild(footerCard);
+    }
+}
 
 // create saved place
 function callSaveHistory() {
 
-
-   // sHistory.innerHTML = "";
+    // sHistory.innerHTML = "";
     for (let i = 0; i < saveHistory.length; i++) {
 
         const saveItem = document.createElement("input");
@@ -309,8 +341,6 @@ function callSaveHistory() {
         // saveItem.setAttribute("readonly", true);
         // saveItem.setAttribute("class", "btn");
         // saveItem.setAttribute("value", saveHistory[i]);
-
-        // end Brian/
         //sHistory.append(saveItem);
     }
 }
