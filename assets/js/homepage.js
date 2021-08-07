@@ -86,7 +86,7 @@ var createCards = function () {
     for (var i = 0; i < placesArray.length; i++) {
         // create a column div to hold the card
         var columnDiv = document.createElement("div");
-        columnDiv.classList = "column is-full-mobile is-one-quarters-tablet is-one-quarter-desktop is-one-fourth-widescreen is-one-fourth-fullhd";
+        columnDiv.classList = "column is-12-mobile is-6-tablet is-3-desktop is-3-widescreen is-3-fullhd";
         cardContainer.appendChild(columnDiv);
 
         // create a card to hold data
