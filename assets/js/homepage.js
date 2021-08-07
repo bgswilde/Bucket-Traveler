@@ -17,6 +17,8 @@ var myList = document.getElementById("label");
 const save = document.getElementsByClassName("s-card");
 var saveHistory = JSON.parse(localStorage.getItem("save")) || [];
 const sHistory = document.getElementById("save-id");
+var deleteCard = document.getElementsByClassName("d-btn");
+
 
 var searchSubmitHandler = function (event) {
     // prevent page from refreshing
@@ -175,31 +177,28 @@ function callSaveHistory() {
     for (let i = 0; i < saveHistory.length; i++) {
 
         console.log("TEST CREATE SAVED CARD ");
+
         const saveItem = document.createElement("input");
+        // Brian's 
+        // create display saved cards
+
         saveItem.setAttribute("type", "text");
         saveItem.setAttribute("readonly", true);
         saveItem.setAttribute("class", "btn");
         saveItem.setAttribute("value", saveHistory[i]);
-        // saveItem.addEventListener("click", function (evt) {
-        //     //getPlaces(saveItem.value);
-        // })
+
+        // end Brian/
         sHistory.append(saveItem);
     }
 }
 
-  callSaveHistory();
- // if (saveHistory.length > 0) {
- //     getPlaces(saveHistory[saveHistory.length - 1]);
- // }
+callSaveHistory();
 
-// // Get history
-// search.addEventListener("click", function () {
-//     const searchTerm = city.value;
-//     getPlaces(searchTerm);
-//     searchHistory.push(searchTerm);
-//     localStorage.setItem("search", JSON.stringify(searchHistory));
-//     callSearchHistory();
-// })
+function deleteSave() {
+    localStorage.clear();
+    saveHistory = [];
+}
+deleteSave();
 
 // // Clear History
 // clearSearch.addEventListener("click", function () {
@@ -208,27 +207,3 @@ function callSaveHistory() {
 //     callSearchHistory();
 
 // })
-
-// // create cities search
-// function callSearchHistory() {
-//     history.innerHTML = "";
-//     myList.textContent = "My Saved Bucket Traveller List";
-
-//     for (let i = 0; i < searchHistory.length; i++) {
-//        console.log("test")
-//         const historyItem = document.createElement("input");
-//         historyItem.setAttribute("type", "text");
-//         historyItem.setAttribute("readonly", true);
-//         historyItem.setAttribute("class", "btn");
-//         historyItem.setAttribute("value", searchHistory[i]);
-//         historyItem.addEventListener("click", function () {
-//             getPlaces(historyItem.value);
-//         })
-//         history.append(historyItem);
-//     }
-// }
-
-// callSearchHistory();
-// if (searchHistory.length > 0) {
-//     getPlaces(searchHistory[searchHistory.length - 1]);
-// } 
