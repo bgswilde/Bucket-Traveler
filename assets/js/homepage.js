@@ -20,7 +20,6 @@ var saveHistory = JSON.parse(localStorage.getItem("save")) || [];
 const sHistory = document.getElementById("save-id");
 var deleteCard = document.getElementsByClassName("d-btn");
 
-
 var searchSubmitHandler = function (event) {
     // prevent page from refreshing
     event.preventDefault();
@@ -30,12 +29,7 @@ var searchSubmitHandler = function (event) {
 
     if (cityName) {
         getPlaces(cityName);
-        //searchHistory.push(cityName)
-        //localStorage.setItem('search', JSON.stringify(searchHistory));
-
-
     }
-    // city.value = "";
 };
 
 var getPlaces = function (searchCity) {
@@ -162,6 +156,7 @@ var createCards = function () {
             localStorage.setItem("save", JSON.stringify(saveHistory));
             
             addSaveItem();
+
         })
     }
 
