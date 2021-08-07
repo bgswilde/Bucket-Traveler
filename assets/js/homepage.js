@@ -30,7 +30,7 @@ var searchSubmitHandler = function (event) {
         //searchHistory.push(cityName)
         //localStorage.setItem('search', JSON.stringify(searchHistory));
 
-        
+
     }
     // city.value = "";
 };
@@ -69,161 +69,166 @@ var getPlaces = function (searchCity) {
                             setTimeout(createCards, 1000);
                         }))
             }))
-
-    var createCards = function () {
-        console.log("this was reached");
-
-        // remove old results
-        cardContainer.innerHTML = "";
-
-        // remove waiting message
-        waitText.classList = "hidden";
-
-        // loop through the array and display cards
-        for (var i = 0; i < placesArray.length; i++) {
-            // create a column div to hold the card
-            var columnDiv = document.createElement("div");
-            columnDiv.classList = "column is-full-mobile is-one-quarters-tablet is-one-quarter-desktop is-one-fourth-widescreen is-one-fourth-fullhd";
-            cardContainer.appendChild(columnDiv);
-
-            // create a card to hold data
-            var placeCard = document.createElement("div");
-            placeCard.classList = "card card-h br-0";
-            columnDiv.appendChild(placeCard);
-
-            // create an image for each card
-            var placeImage = document.createElement("figure");
-            var imageData = document.createElement("img");
-            placeImage.classList = "image is-4by3";
-            imageData.setAttribute("id", "img");
-            if(placesArray[i].preview){
-                imageData.setAttribute("src", placesArray[i].preview.source);
-            } else  {
-                imageData.setAttribute('src', '')
-            }
-            imageData.setAttribute("alt", "image showing a view of " + placesArray[i].name + "");
-            placeImage.appendChild(imageData);
-
-            // create a title for each card
-            var placeTitle = document.createElement("p");
-            placeTitle.setAttribute("id", "p-title");
-            placeTitle.classList = "title is-4 p-10";
-            placeTitle.textContent = placesArray[i].name;
-
-            // create a description for each card
-            var placeText = document.createElement("p");
-            placeText.setAttribute("id", "p-text");
-            placeText.classList = "description ellipsis ellipsis p-10";
-            placeText.textContent = placesArray[i].wikipedia_extracts.text;
-
-            // create a card footer with save and more buttons
-            var footerCard = document.createElement("div");
-            var footer = document.createElement("footer");
-            var saveBtn = document.createElement("button");
-            var moreBtn = document.createElement("a");
-            footerCard.classList = "card br-0";
-            footer.classList = "card-footer";
-            saveBtn.classList = "card-footer-item btn2";
-            moreBtn.classList = "card-footer-item btn2";
-            saveBtn.textContent = "Save";
-
-            // Get saved value
-            saveBtn.setAttribute('data-name', placesArray[i].name);
-            saveBtn.setAttribute("id", "save-button");
-            moreBtn.setAttribute("href", placesArray[i].wikipedia);
-            moreBtn.textContent = "More";
-            moreBtn.setAttribute("target", "_blank");
-            footerCard.appendChild(footer);
-            footer.appendChild(saveBtn);
-            footer.appendChild(moreBtn);
-
-            // append children to card
-            placeCard.appendChild(placeImage);
-            placeCard.appendChild(placeTitle);
-            placeCard.appendChild(placeText);
-            columnDiv.appendChild(footerCard);
-
-            // onclick save, do local storage
-            saveBtn.addEventListener('click', function(evt){
-                console.log('CLICKED BUTTON')
-                console.log('THIS-->', evt.target.dataset.name)
-
-                    const saveTerm = evt.target.dataset.name;
-                    getPlaces(saveTerm);
-                    saveHistory.push(saveTerm);
-                    localStorage.setItem("save", JSON.stringify(saveHistory));
-                    callSaveHistory();
-            })
-
-            // create saved place
-            function callSaveHistory() {
-                sHistory.innerHTML = "";            
-                for (let i = 0; i < saveHistory.length; i++) {
-
-                   console.log("TEST CREATE SAVED CARD ");
-                    const saveItem = document.createElement("input");
-                    saveItem.setAttribute("type", "text");
-                    saveItem.setAttribute("readonly", true);
-                    saveItem.setAttribute("class", "btn");
-                    saveItem.setAttribute("value", saveHistory[i]);
-                    saveItem.addEventListener("click", function (evt) {
-                        getPlaces(saveItem.value);
-                    })
-                    sHistory.append(saveItem);
-                }
-            }
-            
-            callSaveHistory();
-            if (saveHistory.length > 0) {
-                getPlaces(saveHistory[saveHistory.length - 1]);
-            }
-        }
-
-        sectionCards.classList.remove("hidden");
-       // myList.classList.remove("hidden");
-    };
 }
+
+var createCards = function () {
+    console.log("this was reached");
+
+    // remove old results
+    cardContainer.innerHTML = "";
+
+    // remove waiting message
+    waitText.classList = "hidden";
+
+    // loop through the array and display cards
+    for (var i = 0; i < placesArray.length; i++) {
+        // create a column div to hold the card
+        var columnDiv = document.createElement("div");
+        columnDiv.classList = "column is-full-mobile is-one-quarters-tablet is-one-quarter-desktop is-one-fourth-widescreen is-one-fourth-fullhd";
+        cardContainer.appendChild(columnDiv);
+
+        // create a card to hold data
+        var placeCard = document.createElement("div");
+        placeCard.classList = "card card-h br-0";
+        columnDiv.appendChild(placeCard);
+
+        // create an image for each card
+        var placeImage = document.createElement("figure");
+        var imageData = document.createElement("img");
+        placeImage.classList = "image is-4by3";
+        imageData.setAttribute("id", "img");
+        if (placesArray[i].preview) {
+            imageData.setAttribute("src", placesArray[i].preview.source);
+        } else {
+            imageData.setAttribute('src', '')
+        }
+        imageData.setAttribute("alt", "image showing a view of " + placesArray[i].name + "");
+        placeImage.appendChild(imageData);
+
+        // create a title for each card
+        var placeTitle = document.createElement("p");
+        placeTitle.setAttribute("id", "p-title");
+        placeTitle.classList = "title is-4 p-10";
+        placeTitle.textContent = placesArray[i].name;
+
+        // create a description for each card
+        var placeText = document.createElement("p");
+        placeText.setAttribute("id", "p-text");
+        placeText.classList = "description ellipsis ellipsis p-10";
+        placeText.textContent = placesArray[i].wikipedia_extracts.text;
+
+        // create a card footer with save and more buttons
+        var footerCard = document.createElement("div");
+        var footer = document.createElement("footer");
+        var saveBtn = document.createElement("button");
+        var moreBtn = document.createElement("a");
+        footerCard.classList = "card br-0";
+        footer.classList = "card-footer";
+        saveBtn.classList = "card-footer-item btn2";
+        moreBtn.classList = "card-footer-item btn2";
+        saveBtn.textContent = "Save";
+
+        // Get saved value
+        saveBtn.setAttribute('data-name', placesArray[i].name);
+        saveBtn.setAttribute('data-img', placesArray[i].preview.source);
+        saveBtn.setAttribute('data-desc', placesArray[i].wikipedia_extracts.text)
+        saveBtn.setAttribute("id", "save-button");
+        moreBtn.setAttribute("href", placesArray[i].wikipedia);
+        moreBtn.textContent = "More";
+        moreBtn.setAttribute("target", "_blank");
+        footerCard.appendChild(footer);
+        footer.appendChild(saveBtn);
+        footer.appendChild(moreBtn);
+
+        // append children to card
+        placeCard.appendChild(placeImage);
+        placeCard.appendChild(placeTitle);
+        placeCard.appendChild(placeText);
+        columnDiv.appendChild(footerCard);
+
+        // onclick save, do local storage
+        saveBtn.addEventListener('click', function (evt) {
+            console.log('CLICKED BUTTON')
+            console.log('THIS-->', evt.target.dataset.name)
+            console.log('THIS-->', evt.target.dataset.img)
+            console.log('THIS-->', evt.target.dataset.desc)
+
+            const saveTerm = evt.target.dataset.name;
+            //getPlaces(saveTerm);
+            saveHistory.push(saveTerm);
+            localStorage.setItem("save", JSON.stringify(saveHistory));
+            callSaveHistory();
+        })
+    }
+
+    sectionCards.classList.remove("hidden");
+};
+
 
 // event listeners
 searchEl.addEventListener("submit", searchSubmitHandler);
 
-// Get history
-search.addEventListener("click", function () {
-    const searchTerm = city.value;
-    getPlaces(searchTerm);
-    searchHistory.push(searchTerm);
-    localStorage.setItem("search", JSON.stringify(searchHistory));
-    callSearchHistory();
-})
 
-// Clear History
-clearSearch.addEventListener("click", function () {
-    localStorage.clear();
-    searchHistory = [];
-    callSearchHistory();
+// create saved place
+function callSaveHistory() {
+    sHistory.innerHTML = "";
+    for (let i = 0; i < saveHistory.length; i++) {
 
-})
-
-// create cities search
-function callSearchHistory() {
-    history.innerHTML = "";
-    myList.textContent = "My Saved Bucket Traveller List";
-
-    for (let i = 0; i < searchHistory.length; i++) {
-       console.log("test")
-        const historyItem = document.createElement("input");
-        historyItem.setAttribute("type", "text");
-        historyItem.setAttribute("readonly", true);
-        historyItem.setAttribute("class", "btn");
-        historyItem.setAttribute("value", searchHistory[i]);
-        historyItem.addEventListener("click", function () {
-            getPlaces(historyItem.value);
-        })
-        history.append(historyItem);
+        console.log("TEST CREATE SAVED CARD ");
+        const saveItem = document.createElement("input");
+        saveItem.setAttribute("type", "text");
+        saveItem.setAttribute("readonly", true);
+        saveItem.setAttribute("class", "btn");
+        saveItem.setAttribute("value", saveHistory[i]);
+        // saveItem.addEventListener("click", function (evt) {
+        //     //getPlaces(saveItem.value);
+        // })
+        sHistory.append(saveItem);
     }
 }
 
-callSearchHistory();
-if (searchHistory.length > 0) {
-    getPlaces(searchHistory[searchHistory.length - 1]);
-}
+  callSaveHistory();
+ // if (saveHistory.length > 0) {
+ //     getPlaces(saveHistory[saveHistory.length - 1]);
+ // }
+
+// // Get history
+// search.addEventListener("click", function () {
+//     const searchTerm = city.value;
+//     getPlaces(searchTerm);
+//     searchHistory.push(searchTerm);
+//     localStorage.setItem("search", JSON.stringify(searchHistory));
+//     callSearchHistory();
+// })
+
+// // Clear History
+// clearSearch.addEventListener("click", function () {
+//     localStorage.clear();
+//     searchHistory = [];
+//     callSearchHistory();
+
+// })
+
+// // create cities search
+// function callSearchHistory() {
+//     history.innerHTML = "";
+//     myList.textContent = "My Saved Bucket Traveller List";
+
+//     for (let i = 0; i < searchHistory.length; i++) {
+//        console.log("test")
+//         const historyItem = document.createElement("input");
+//         historyItem.setAttribute("type", "text");
+//         historyItem.setAttribute("readonly", true);
+//         historyItem.setAttribute("class", "btn");
+//         historyItem.setAttribute("value", searchHistory[i]);
+//         historyItem.addEventListener("click", function () {
+//             getPlaces(historyItem.value);
+//         })
+//         history.append(historyItem);
+//     }
+// }
+
+// callSearchHistory();
+// if (searchHistory.length > 0) {
+//     getPlaces(searchHistory[searchHistory.length - 1]);
+// } 
