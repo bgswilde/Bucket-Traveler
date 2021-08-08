@@ -304,7 +304,6 @@ function callSaveHistory() {
     }
 }
 
-
 // FUNCTION DO DELETE BUCKETLIST AND START OVER
 deleteCards.addEventListener("click", function () {
     localStorage.clear();
