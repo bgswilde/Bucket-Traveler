@@ -3,45 +3,58 @@
 
 ## Description
 
-     The purpose of Destination Hub (aka Bucket Traveler) is to make it easier for users to find and save a bucket list of travel destinations.  When searching a location, users will be able to find different attractions and create their own “bucket list” of events.
+The purpose of Destination Hub (aka Bucket Traveler) is to make it easier for users to find and save a bucket list of travel destinations.  When searching a location, users will be able to find different attractions and create their own “bucket list” of events.
 
-     It is often hard to remember and research all the different attractions. We are building this website  to make the process more efficient.
+It is often hard to remember and research all the different attractions. We are building this website  to make the process more efficient.
+## User Story
 
-### User Story
+As a USER I want to search for vacation locations and find local attractions to visit while I am there.
 
+Acceptance Criteria:
 
-    As a USER I want to search for vacation locations and find local attractions to visit while I am there.
+- When I enter a location into a search bar and click on the search icon to submit,
 
-    Acceptance Criteria:
-        --When I enter a location into a search bar and click on the search icon to submit,
-        --Then the application will return up to 10 cards with a name of an attraction, image and a more button to get more information  
-        --So that I can build my dream bucket list of attractions to visit.
-        --Given that I want to save my selections,
-        --When I hit the save button on an attraction,
-        --Then it will save a list at the bottom for me to refer back to.
-        --When I type in a new location, then the cards onthe screen will be replaced with new cards from the newly searched location.
+- Then the application will return up to 10 cards with a name of an attraction, image and a more button to get more information  
 
-### Future Enhancements
-    Future Enhancements:
-        --Add map to display where all the attractions are in relation to the city searched
-        --Add flight and hotel capability 
-        --Add log in capability so that the saved list can be shared across devices.
-        --Return more results in search and add a carousel to display them.
+- So that I can build my dream bucket list of attractions to visit.
+
+- Given that I want to save my selections,
+
+- When I hit the save button on an attraction,
+
+- Then it will save a list at the bottom for me to refer back to.
+
+- When I type in a new location, then the cards onthe screen will be replaced with new cards from the newly searched location.
+
+## Future Enhancements
+
+Future Enhancements:
+
+- Add map to display where all the attractions are in relation to the city searched
+
+- Add flight and hotel capability 
+
+- Add log in capability so that the saved list can be shared across devices.
+
+- Return more results in search and add a carousel to display them.
 
 ![Project Demo](./assets/images/demo.gif)
 ---
 
-### Table of Contents
+## Table of Contents
 
 - [Destination Hub](#destination-hub)
 - [Description](#description)
+- [User Story](#user-story)
+- [Future Enhancements](#future-enhacements)
+- [Technologies](#technologies)
 - [Download](#how-to-download)
 - [License](#license)
 - [Author Info](#author-info)
 
 ---
 
-#### Technologies
+## Technologies
 - HTML
 - CSS
 - Bulma

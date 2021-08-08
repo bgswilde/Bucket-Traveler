@@ -88,7 +88,7 @@ var getPlaces = function (searchCity) {
     searchHeading.classList = "title is-3";
     searchHeading.textContent = "Showing results for " + searchCity;
     waitText.removeAttribute("class", "hidden");
-    
+
     // hide slideshow
     slideView.classList = "hidden";
     slideDot.classList = "hidden";
@@ -114,7 +114,7 @@ var getPlaces = function (searchCity) {
                                     })
                             };
                             // delay so createCards function doesn't run until the data array is completed.
-                            setTimeout(createCards, 1200);
+                            setTimeout(createCards, 1000);
                         }))
             }))
 }
@@ -208,11 +208,12 @@ var createCards = function () {
     sectionCards.classList.remove("hidden");
 };
 
-
-
 // FUNCTION TO CREATE CARDS TO GO INTO BUCKETLIST. USED WHEN CARD IS SAVED AND WHEN LOCAL STORAGE IS CALLED ON PAGE LOAD
 var bucketCards = function (savedItemData) {
+    myList.classList.remove('hidden');
+    myList.classList = 'title is-2';
     deleteCards.classList.remove('hidden')
+    deleteCards.classList = 'btn btn-primary  btnColor mb-3 p-2 w-100'
 
     // create a column div to hold the card
     var columnDiv = document.createElement("div");
@@ -274,7 +275,6 @@ var bucketCards = function (savedItemData) {
 };
 
 
-
 // FUNCTION FOR CREATING A SAVE CARD IN BUCKET LIST WHEN "SAVE" IS CLICKED
 function addSaveItem() {
     // remove empty Bucket List message
@@ -289,7 +289,6 @@ function addSaveItem() {
 };
 
 
-
 // FUNCTION TO CREATE CARDS FROM LOCAL STORAGE TO BUCKETLIST WHEN PAGE LOADS
 function callSaveHistory() {
     // goes through the whole saved array to create cards in the bucket list
@@ -299,12 +298,11 @@ function callSaveHistory() {
 
     if (saveHistory.length > 0) {
         bucketlistEmptyMessage.classList = "hidden";
-        slideView.classList = "hidden";
-        slideDot.classList = "hidden";
-        deleteCards.classList.remove('hidden')
+        //slideView.classList = "hidden";
+        //slideDot.classList = "hidden";
+        deleteCards.classList.remove('hidden');
     }
 }
-
 
 
 // FUNCTION DO DELETE BUCKETLIST AND START OVER
@@ -313,9 +311,9 @@ deleteCards.addEventListener("click", function () {
     saveHistory = [];
     callSaveHistory();
     bucketlistContainer.innerHTML = "";
-})
-
-
+    deleteCards.classList = 'hidden';
+    myList.classList = 'hidden';
+});
 
 // loads the Bucket List upon page load
 callSaveHistory();
