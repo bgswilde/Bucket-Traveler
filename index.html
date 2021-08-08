@@ -83,10 +83,11 @@
                 <img class="img2" src="./assets/images/pexels-stein-egil-liland-3408744.jpg">
                 <div class="text">Myrland, Norway</div>
             </div>
-            <div class="mySlides fade">
-                <div class="numbertext">6 / 10</div>
-                <img class="img2" src="./assets/images/pexels-roman-kirienko-8775536.jpg">
-                <div class="text">Visit gorgeous mountians</div>
+            <div class="card br-0">
+                <footer id="save-place" class="card-footer">
+                    <a id="save-button" href="#" class="card-footer-item s-card">Save</a>
+                    <a href="#" class="card-footer-item">More</a>
+                </footer>
             </div>
             <div class="mySlides fade">
                 <div class="numbertext">7 / 10</div>
@@ -129,7 +130,7 @@
         </div>
         <!-- END SLIDESHOW -->
 
-        <!-- BUCKET LIST HEADER AND DELTE BUTTON -->
+    <section id="text-label" class="">
         <div class="has-text-centered m-20">
             <h2 id="label" class="title is-2">My Bucket List</h2>
         </div>
@@ -137,15 +138,11 @@
             <button class="btn btn-primary  btnColor mb-3 p-2 w-100 hidden" type="button" id="clear-history">Delete
                 List</button>
         </div>
-    </section>
-
-    <!-- Bucket List container -->
-    <section id="saved-attractions" class="containter columns is-multiline attractions-row-container">
-        <!-- message displays if bucket list is empty -->
-        <div id="bucket-list-empty" class="column is-full">
-            <p class="waiting-message black">Your Bucket List is currently empty. Search locations and click SAVE on the
-                items you'd like to save to your Bucket List!</p>
+        <div id="dlist" class="has-text-centered">
+            <button  class="btn btn-primary  btnColor mb-3 p-2 w-100" type="button" id="clear-history">Delete List</button>
         </div>
+        <div id="history" class="has-text-centered"></div>
+        <div id="save-id" class="has-text-centered"></div>
     </section>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
