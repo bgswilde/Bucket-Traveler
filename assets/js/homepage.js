@@ -1,13 +1,17 @@
-
+// KEY GLOBAL VARIABLES FOR API, DOM OBJECTS, SEARCH ARRAY
 var apiKey = "5ae2e3f221c38a28845f05b69ebaab9667831cd14bd320fe563efa88";
 var apiKey2 = "5ae2e3f221c38a28845f05b6a749653163ddad9adc28cbe035c9fa5e";
 var placesArray = [];
 var cardContainer = document.getElementById("attractions");
+var bucketlistContainer = document.getElementById("saved-attractions");
+var bucketlistEmptyMessage = document.getElementById("bucket-list-empty");
 var searchEl = document.getElementById("search-element");
 var sectionCards = document.getElementById("attractions");
 var welcome = document.getElementById("welcome");
+var instructions = document.getElementById("instructions");
 var searchHeading = document.getElementById("search-heading");
 var waitText = document.getElementById("wait");
+var holdingImage = document.getElementById("holding-image");
 const city = document.getElementById("enter-city");
 const search = document.getElementById("search-button");
 const clearSearch = document.getElementById("clear-history");
@@ -19,6 +23,9 @@ const save = document.getElementsByClassName("s-card");
 var saveHistory = JSON.parse(localStorage.getItem("save")) || [];
 const sHistory = document.getElementById("save-id");
 
+
+
+// FUNCTION TO HANDLE THE 'SUBMIT' EVENT OF SEARCHING A PLACE
 var searchSubmitHandler = function (event) {
     // prevent page from refreshing
     event.preventDefault();
@@ -33,17 +40,22 @@ var searchSubmitHandler = function (event) {
 
         
     }
-    // city.value = "";
 };
 
+
+
+// FUNCTION TO CALL APIS FOR DATA
 var getPlaces = function (searchCity) {
     // clear array
     placesArray = [];
 
-    // display search heading and hide welcome message
+    // hide welcome message
     welcome.classList = "hidden";
+    instructions.classList = "hidden";
+
+    // display search heading with loading message
     searchHeading.classList = "title is-3";
-    searchHeading.textContent = "showing results for " + searchCity;
+    searchHeading.textContent = "Showing results for " + searchCity;
     waitText.removeAttribute("class", "hidden");
 
     // fetch the city name from search to get coordinates(fix link below to reflect)
@@ -55,42 +67,43 @@ var getPlaces = function (searchCity) {
                     .then(response => (response.json())
                         .then(data => {
                             // for loop to push data to placesArray
-                            // console.log(data)
                             for (var i = 0; i < data.length; i++) {
                                 // fetch call using xid for more data
                                 fetch("https://api.opentripmap.com/0.1/en/places/xid/" + data[i].xid + "?apikey=" + apiKey2)
                                     // push into the array
                                     .then(response => response.json())
                                     .then(data => {
-                                        console.log(data)
                                         placesArray.push(data)
                                         return placesArray;
                                     })
                             };
+                            // delay so createCards function doesn't run until the data array is completed.
                             setTimeout(createCards, 1000);
                         }))
             }))
+}
 
-    var createCards = function () {
-        console.log("this was reached");
 
-        // remove old results
-        cardContainer.innerHTML = "";
 
-        // remove waiting message
-        waitText.classList = "hidden";
+// FUNCTION TO CREATE LOCATION RESULT CARDS USING ARRAY CREATED IN GETPLACES FUNCTION
+var createCards = function () {
+    // remove old results
+    cardContainer.innerHTML = "";
 
-        // loop through the array and display cards
-        for (var i = 0; i < placesArray.length; i++) {
-            // create a column div to hold the card
-            var columnDiv = document.createElement("div");
-            columnDiv.classList = "column is-full-mobile is-one-quarters-tablet is-one-quarter-desktop is-one-fourth-widescreen is-one-fourth-fullhd";
-            cardContainer.appendChild(columnDiv);
+    // remove waiting message
+    waitText.classList = "hidden";
 
-            // create a card to hold data
-            var placeCard = document.createElement("div");
-            placeCard.classList = "card card-h br-0";
-            columnDiv.appendChild(placeCard);
+    // loop through the array and display cards
+    for (var i = 0; i < placesArray.length; i++) {
+        // create a column div to hold the card
+        var columnDiv = document.createElement("div");
+        columnDiv.classList = "column is-12-mobile is-6-tablet is-3-desktop is-3-widescreen is-3-fullhd";
+        cardContainer.appendChild(columnDiv);
+
+        // create a card to hold data
+        var placeCard = document.createElement("div");
+        placeCard.classList = "card br-0";
+        columnDiv.appendChild(placeCard);
 
             // create an image for each card
             var placeImage = document.createElement("figure");
@@ -179,6 +192,8 @@ var getPlaces = function (searchCity) {
                 getPlaces(saveHistory[saveHistory.length - 1]);
             }
         }
+        imageData.setAttribute("alt", "image showing a view of " + placesArray[i].name + "");
+        placeImage.appendChild(imageData);
 
         sectionCards.classList.remove("hidden");
        // myList.classList.remove("hidden");
@@ -188,14 +203,16 @@ var getPlaces = function (searchCity) {
 // event listeners
 searchEl.addEventListener("submit", searchSubmitHandler);
 
-// Get history
-search.addEventListener("click", function () {
-    const searchTerm = city.value;
-    getPlaces(searchTerm);
-    searchHistory.push(searchTerm);
-    localStorage.setItem("search", JSON.stringify(searchHistory));
-    callSearchHistory();
-})
+        // create a card footer with save and more buttons
+        var footerCard = document.createElement("div");
+        var footer = document.createElement("footer");
+        var saveBtn = document.createElement("button");
+        var moreBtn = document.createElement("a");
+        footerCard.classList = "card br-0";
+        footer.classList = "card-footer";
+        saveBtn.classList = "card-footer-item btn2";
+        moreBtn.classList = "card-footer-item btn2";
+        saveBtn.textContent = "Save";
 
 // Clear History
 clearSearch.addEventListener("click", function () {
@@ -220,9 +237,76 @@ function callSearchHistory() {
         historyItem.addEventListener("click", function () {
             getPlaces(historyItem.value);
         })
-        history.append(historyItem);
     }
-}
+    // make the card display visible
+    sectionCards.classList.remove("hidden");
+};
+
+// FUNCTION TO CREATE CARDS TO GO INTO BUCKETLIST. USED WHEN CARD IS SAVED AND WHEN LOCAL STORAGE IS CALLED ON PAGE LOAD
+var bucketCards = function (savedItemData) {
+    myList.classList.remove('hidden');
+    myList.classList = 'title is-2';
+    deleteCards.classList.remove('hidden')
+    deleteCards.classList = 'btn btn-primary  btnColor mb-3 p-2 w-100'
+
+    // create a column div to hold the card
+    var columnDiv = document.createElement("div");
+    columnDiv.classList = "column is-12-mobile is-6-tablet is-3-desktop is-3-widescreen is-3-fullhd";
+    bucketlistContainer.appendChild(columnDiv);
+
+    // create a card to hold data
+    var placeCard = document.createElement("div");
+    placeCard.classList = "card br-0";
+    columnDiv.appendChild(placeCard);
+
+    // create an image for each card
+    var placeImage = document.createElement("figure");
+    var imageData = document.createElement("img");
+    placeImage.classList = "image is-4by3";
+    imageData.setAttribute("id", "img");
+    if (savedItemData.img) {
+        imageData.setAttribute("src", savedItemData.img);
+    } else {
+        imageData.setAttribute('src', '')
+    }
+    imageData.setAttribute("alt", "image showing a view of " + savedItemData.name + "");
+    placeImage.appendChild(imageData);
+
+    // create a title for each card
+    var placeTitle = document.createElement("p");
+    placeTitle.setAttribute("id", "p-title");
+    placeTitle.classList = "title is-4 mgl p-10";
+    placeTitle.textContent = savedItemData.name;
+
+    // create a description for each card
+    var placeText = document.createElement("p");
+    placeText.setAttribute("id", "p-text");
+    placeText.classList = "description ellipsis ellipsis p-10";
+    placeText.textContent = savedItemData.desc;
+
+    // create a card footer with delete and more buttons
+    var footerCard = document.createElement("div");
+    var footer = document.createElement("footer");
+    // var deleteBtn = document.createElement("button");
+    var moreBtn = document.createElement("a");
+    footerCard.classList = "card br-0";
+    footer.classList = "card-footer";
+    //deleteBtn.classList = "card-footer-item btn2 d-btn";
+    // deleteBtn.textContent = "Delete";
+    moreBtn.classList = "card-footer-item btn2";
+    moreBtn.textContent = "More";
+    moreBtn.setAttribute("href", savedItemData.link);
+    moreBtn.setAttribute("target", "_blank");
+    footerCard.appendChild(footer);
+    //footer.appendChild(deleteBtn);
+    footer.appendChild(moreBtn);
+
+    // append children to card
+    placeCard.appendChild(placeImage);
+    placeCard.appendChild(placeTitle);
+    placeCard.appendChild(placeText);
+    columnDiv.appendChild(footerCard);
+};
 
 callSearchHistory();
 if (searchHistory.length > 0) {

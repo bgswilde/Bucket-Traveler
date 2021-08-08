@@ -14,13 +14,14 @@
 <body>
     <!--begin hero-->
     <section class="hero">
-
         <div class="hero-content">
-
+            <!-- Bucket Traveler Logo-->
             <h1 class="hero-title">
                 <img src="./assets/images/logo blue.png"
                     alt=" pencil drawing of mountians with text of bucket traveler and slogan of travel with us">
             </h1>
+
+            <!-- search bar -->
             <form id="search-element" class="searchbar">
                 <input id="enter-city" type="text" class="searchinp" name="search"
                     placeholder="Search Location to Find Attractions">
@@ -38,23 +39,49 @@
                 <p id="welcome" class="title is-3">Great Places Are Waiting...</h3>
                 <p id="search-heading" class="title is-3 hidden">
                     </h3>
+                <p id="instructions" class="waiting-message">Search awesome locations, and save your favorites to your
+                    Bucket List!</p>
                 <p id="wait" class="hidden">this may take a second...</p>
             </div>
         </div>
     </section>
 
-    <section id="attractions" class="containter columns is-multiline attractions-row-container hidden">
+    <!-- search results container (dynamically created cards)-->
+    <section id="attractions" class="containter columns is-multiline hidden">
+    </section>
 
-        <div
-            class="column is-full-mobile is-one-quarters-tablet is-one-quarter-desktop is-one-fourth-widescreen is-one-fourth-fullhd">
-            <div class="card br-0">
-                <figure class="image is-4by3">
-                    <img id="img" src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                </figure>
-                <div class="p-10">
-                    <p id="p-title" class="title is-4 mgl">Sample Card</p>
-                    <p id="p-text" class="description ellipsis ellipsis">sample description ellipsis text.</p>
-                </div>
+    <!-- Bucket List heading -->
+    <section id="text-label" class="">
+        <!-- SLIDESHOW -->
+        <div id="gallery" class="slideshow-container">
+            <!-- slide details -->
+            <div class="mySlides fade">
+                <div class="numbertext">1 / 10</div>
+                <img class="img2" src="./assets/images/pexels-david-bartus-1166209.jpg">
+                <div class="text">Blooming Lavender Field and Sunset Floral Landscape</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">2 / 10</div>
+                <img class="img2" src="./assets/images/pexels-artem-beliaikin-853199.jpg">
+                <div class="text">Visit fabulos beaches</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">3 / 10</div>
+                <img class="img2" src="./assets/images/pexels-james-wheeler-414612.jpg">
+                <div class="text">Lost Lake Trial Whistler, BC, Canada</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">4 / 10</div>
+                <img class="img2" src="./assets/images/pexels-james-wheeler-417074.jpg">
+                <div class="text">Moraine Lake Field, AB,Canada</div>
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">5 / 10</div>
+                <img class="img2" src="./assets/images/pexels-stein-egil-liland-3408744.jpg">
+                <div class="text">Myrland, Norway</div>
             </div>
             <div class="card br-0">
                 <footer id="save-place" class="card-footer">
@@ -62,12 +89,54 @@
                     <a href="#" class="card-footer-item">More</a>
                 </footer>
             </div>
+            <div class="mySlides fade">
+                <div class="numbertext">7 / 10</div>
+                <img class="img2" src="./assets/images/pexels-julius-silver-753626.jpg">
+                <div class="text">Euskirchen, Germany</div>
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">8 / 10</div>
+                <img class="img2" src="./assets/images/pexels-pixabay-371589.jpg">
+                <div class="text">Visit gorgeous mountians</div>
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">9 / 10</div>
+                <img class="img2" src="./assets/images/pexels-pixabay-219998.jpg">
+                <div class="text">Puerto Vallarta, Mexico, Sunset</div>
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">10 / 10</div>
+                <img class="img2" src="./assets/images/pexels-lisa-1107717.jpg">
+                <div class="text">Kandergrund, Switzerland</div>
+            </div>
+            <!-- controls -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
         </div>
-    </section>
+        <br>
+        <!-- nav dots -->
+        <div id="dot-gallery" class="has-text-centered" style="margin-bottom: 20px;">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+            <span class="dot" onclick="currentSlide(6)"></span>
+            <span class="dot" onclick="currentSlide(7)"></span>
+            <span class="dot" onclick="currentSlide(8)"></span>
+            <span class="dot" onclick="currentSlide(9)"></span>
+            <span class="dot" onclick="currentSlide(10)"></span>
+        </div>
+        <!-- END SLIDESHOW -->
 
     <section id="text-label" class="">
         <div class="has-text-centered m-20">
-            <h2 id="label" class="title is-4"></h2>
+            <h2 id="label" class="title is-2">My Bucket List</h2>
+        </div>
+        <div id="dlist" class="has-text-centered">
+            <button class="btn btn-primary  btnColor mb-3 p-2 w-100 hidden" type="button" id="clear-history">Delete
+                List</button>
         </div>
         <div id="dlist" class="has-text-centered">
             <button  class="btn btn-primary  btnColor mb-3 p-2 w-100" type="button" id="clear-history">Delete List</button>
@@ -76,6 +145,7 @@
         <div id="save-id" class="has-text-centered"></div>
     </section>
 
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/homepage.js"></script>
 </body>
 
