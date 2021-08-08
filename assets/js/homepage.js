@@ -19,7 +19,41 @@ const save = document.getElementsByClassName("s-card");
 var saveHistory = JSON.parse(localStorage.getItem("save")) || [];
 const sHistory = document.getElementById("save-id");
 var deleteCard = document.getElementsByClassName("d-btn");
+var slideView = document.getElementById("gallery");
+var slideDot = document.getElementById("dot-gallery");
+let count = 0;
 
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+var timer = setInterval(function () {
+    slideIndex++;
+    showSlides(slideIndex);
+}, 5000);
+
+function showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("dot");
+    if (n > slides.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length }
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].className += " active";
+}
 
 var searchSubmitHandler = function (event) {
     // prevent page from refreshing
@@ -43,6 +77,8 @@ var getPlaces = function (searchCity) {
     searchHeading.classList = "title is-3";
     searchHeading.textContent = "Showing results for " + searchCity;
     waitText.removeAttribute("class", "hidden");
+    slideView.classList = "hidden";
+    slideDot.classList = "hidden";
 
 
     // fetch the city name from search to get coordinates(fix link below to reflect)
@@ -162,11 +198,11 @@ var createCards = function () {
     }
 
     sectionCards.classList.remove("hidden");
-    
+
 };
 
 // creates the cards to go in the bucket list
-var bucketCards = function(savedItemData) {
+var bucketCards = function (savedItemData) {
     // create a column div to hold the card
     var columnDiv = document.createElement("div");
     columnDiv.classList = "column is-12-mobile is-6-tablet is-3-desktop is-3-widescreen is-3-fullhd";
@@ -237,6 +273,8 @@ var bucketCards = function(savedItemData) {
 function addSaveItem() {
     // remove empty Bucket List message
     bucketlistEmptyMessage.classList = "hidden";
+    slideView.classList = "hidden";
+    slideDot.classList = "hidden";
 
     // takes most recent saveHistory item to create card in bucket list
     for (let i = saveHistory.length - 1; i < saveHistory.length; i++) {
@@ -256,6 +294,8 @@ function callSaveHistory() {
 
     if (saveHistory.length > 0) {
         bucketlistEmptyMessage.classList = "hidden";
+        slideView.classList = "hidden";
+        slideDot.classList = "hidden";
     }
 }
 // loads the Bucket List upon page load
@@ -264,13 +304,6 @@ callSaveHistory();
 function deleteSave(selectedItem) {
     localStorage.removeItem(selectedItem.data);
 }
-
-// // Clear History
-// clearSearch.addEventListener("click", function () {
-//     localStorage.clear();
-//     searchHistory = [];
-//     callSearchHistory();
-// })
 
 // event listeners
 searchEl.addEventListener("submit", searchSubmitHandler);

@@ -39,7 +39,8 @@
                 <p id="welcome" class="title is-3">Great Places Are Waiting...</h3>
                 <p id="search-heading" class="title is-3 hidden">
                     </h3>
-                <p id="instructions" class="waiting-message">Search awesome locations, and save your favorites to your Bucket List!</p>
+                <p id="instructions" class="waiting-message">Search awesome locations, and save your favorites to your
+                    Bucket List!</p>
                 <p id="wait" class="hidden">this may take a second...</p>
             </div>
         </div>
@@ -51,6 +52,37 @@
 
     <!-- Bucket List heading -->
     <section id="text-label" class="">
+        <div id="gallery" class="slideshow-container">
+
+            <div class="mySlides fade">
+                <div class="numbertext">1 / 3</div>
+                <img class="img2" src="./assets/images/globe.jpg" style="width:100%">
+                <div class="text">Caption Text</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">2 / 3</div>
+                <img class="img2" src="./assets/images/logo blue.png" style="width:100%">
+                <div class="text">Caption Two</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">3 / 3</div>
+                <img class="img2" src="./assets/images/logo.jpg" style="width:100%">
+                <div class="text">Caption Three</div>
+            </div>
+
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+        </div>
+        <br>
+
+        <div id="dot-gallery" style="text-align:center; margin-bottom: 20px;">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
         <div class="has-text-centered m-20">
             <h2 id="label" class="title is-2">My Bucket List</h2>
         </div>
@@ -60,7 +92,8 @@
     <section id="saved-attractions" class="containter columns is-multiline attractions-row-container">
         <!-- message displays if bucket list is empty -->
         <div id="bucket-list-empty" class="column is-full">
-            <p class="waiting-message black">Your Bucket List is currently empty. Search locations and click SAVE on the items you'd like to save to your Bucket List!</p>
+            <p class="waiting-message black">Your Bucket List is currently empty. Search locations and click SAVE on the
+                items you'd like to save to your Bucket List!</p>
         </div>
     </section>
 
