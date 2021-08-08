@@ -1,3 +1,4 @@
+// KEY GLOBAL VARIABLES FOR API, DOM OBJECTS, SEARCH ARRAY
 var apiKey = "5ae2e3f221c38a28845f05b69ebaab9667831cd14bd320fe563efa88";
 var apiKey2 = "5ae2e3f221c38a28845f05b6a749653163ddad9adc28cbe035c9fa5e";
 var placesArray = [];
@@ -19,9 +20,12 @@ const save = document.getElementsByClassName("s-card");
 var saveHistory = JSON.parse(localStorage.getItem("save")) || [];
 const sHistory = document.getElementById("save-id");
 var deleteCards = document.getElementById("clear-history")
+
+
+
+// SLIDESHOW VARIABLES AND FUNCTION
 var slideView = document.getElementById("gallery");
 var slideDot = document.getElementById("dot-gallery");
-
 var slideIndex = 1;
 showSlides(slideIndex);
 
@@ -54,6 +58,9 @@ function showSlides(n) {
     dots[slideIndex - 1].className += " active";
 }
 
+
+
+// FUNCTION TO HANDLE THE 'SUBMIT' EVENT OF SEARCHING A PLACE
 var searchSubmitHandler = function (event) {
     // prevent page from refreshing
     event.preventDefault();
@@ -63,23 +70,26 @@ var searchSubmitHandler = function (event) {
 
     if (cityName) {
         getPlaces(cityName);
-        //searchHistory.push(cityName)
-        //localStorage.setItem('search', JSON.stringify(searchHistory));
-
-        
     }
 };
 
+
+
+// FUNCTION TO CALL APIS FOR DATA
 var getPlaces = function (searchCity) {
     // clear array
     placesArray = [];
 
-    // display search heading and hide welcome message
+    // hide welcome message
     welcome.classList = "hidden";
     instructions.classList = "hidden";
+
+    // display search heading with loading message
     searchHeading.classList = "title is-3";
     searchHeading.textContent = "Showing results for " + searchCity;
     waitText.removeAttribute("class", "hidden");
+    
+    // hide slideshow
     slideView.classList = "hidden";
     slideDot.classList = "hidden";
 
@@ -93,26 +103,26 @@ var getPlaces = function (searchCity) {
                     .then(response => (response.json())
                         .then(data => {
                             // for loop to push data to placesArray
-                            // console.log(data)
                             for (var i = 0; i < data.length; i++) {
                                 // fetch call using xid for more data
                                 fetch("https://api.opentripmap.com/0.1/en/places/xid/" + data[i].xid + "?apikey=" + apiKey2)
                                     // push into the array
                                     .then(response => response.json())
                                     .then(data => {
-                                        console.log(data)
                                         placesArray.push(data)
                                         return placesArray;
                                     })
                             };
-                            setTimeout(createCards, 1000);
+                            // delay so createCards function doesn't run until the data array is completed.
+                            setTimeout(createCards, 1200);
                         }))
             }))
 }
 
-var createCards = function () {
-    console.log("this was reached");
 
+
+// FUNCTION TO CREATE LOCATION RESULT CARDS USING ARRAY CREATED IN GETPLACES FUNCTION
+var createCards = function () {
     // remove old results
     cardContainer.innerHTML = "";
 
@@ -186,25 +196,21 @@ var createCards = function () {
         placeCard.appendChild(placeText);
         columnDiv.appendChild(footerCard);
 
-        // onclick save, do local storage
+        // onclick save, push data to local storage
         saveBtn.addEventListener('click', function (evt) {
-            console.log('CLICKED BUTTON')
-            console.log('THIS-->', evt.target.dataset.name)
-            console.log('THIS-->', evt.target.dataset.img)
-            console.log('THIS-->', evt.target.dataset.desc)
-
             const saveTerm = evt.target.dataset;
             saveHistory.push(saveTerm);
             localStorage.setItem("save", JSON.stringify(saveHistory));
             addSaveItem();
         })
     }
-
+    // make the card display visible
     sectionCards.classList.remove("hidden");
-
 };
 
-// creates the cards to go in the bucket list
+
+
+// FUNCTION TO CREATE CARDS TO GO INTO BUCKETLIST. USED WHEN CARD IS SAVED AND WHEN LOCAL STORAGE IS CALLED ON PAGE LOAD
 var bucketCards = function (savedItemData) {
     // create a column div to hold the card
     var columnDiv = document.createElement("div");
@@ -263,19 +269,11 @@ var bucketCards = function (savedItemData) {
     placeCard.appendChild(placeTitle);
     placeCard.appendChild(placeText);
     columnDiv.appendChild(footerCard);
-
-
-    // // onclick save, do local storage
-    // deleteBtn.addEventListener('click', function () {
-    //     console.log('CLICKED BUTTON DELETE')
-    //     console.log(savedItemData)
-    //    // deleteSave(savedItemData);
-    //    var del = savedItemData.data;
-    //    localStorage.removeItem('del');
-    // })
-
 };
 
+
+
+// FUNCTION FOR CREATING A SAVE CARD IN BUCKET LIST WHEN "SAVE" IS CLICKED
 function addSaveItem() {
     // remove empty Bucket List message
     bucketlistEmptyMessage.classList = "hidden";
@@ -289,14 +287,8 @@ function addSaveItem() {
 };
 
 
-// Clear History
-deleteCards.addEventListener("click", function () {
-    console.log("BUTTON CLICKED")
-    localStorage.clear();
-    saveHistory = [];
-    callSaveHistory();
-})
 
+// FUNCTION TO CREATE CARDS FROM LOCAL STORAGE TO BUCKETLIST WHEN PAGE LOADS
 function callSaveHistory() {
     // goes through the whole saved array to create cards in the bucket list
     for (let i = 0; i < saveHistory.length; i++) {
@@ -310,8 +302,21 @@ function callSaveHistory() {
         deleteCards.classList.remove('hidden')
     }
 }
+
+
+
+// FUNCTION DO DELETE BUCKETLIST AND START OVER
+deleteCards.addEventListener("click", function () {
+    localStorage.clear();
+    saveHistory = [];
+    callSaveHistory();
+    bucketlistContainer.innerHTML = "";
+})
+
+
+
 // loads the Bucket List upon page load
 callSaveHistory();
 
-// event listeners
+// event listener
 searchEl.addEventListener("submit", searchSubmitHandler);
