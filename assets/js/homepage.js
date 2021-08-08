@@ -9,9 +9,6 @@ var welcome = document.getElementById("welcome");
 var searchHeading = document.getElementById("search-heading");
 var waitText = document.getElementById("wait");
 const city = document.getElementById("enter-city");
-const search = document.getElementById("search-button");
-const clearSearch = document.getElementById("clear-history");
-let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
 const history = document.getElementById("history");
 var sectionLabel = document.getElementById("text-label");
 var myList = document.getElementById("label");
@@ -21,7 +18,7 @@ const sHistory = document.getElementById("save-id");
 var deleteCard = document.getElementsByClassName("d-btn");
 var slideView = document.getElementById("gallery");
 var slideDot = document.getElementById("dot-gallery");
-
+let count = 0;
 
 var slideIndex = 1;
 showSlides(slideIndex);
@@ -37,7 +34,7 @@ function currentSlide(n) {
 var timer = setInterval(function () {
     slideIndex++;
     showSlides(slideIndex);
-}, 3000);
+}, 5000);
 
 function showSlides(n) {
     var i;
@@ -64,10 +61,6 @@ var searchSubmitHandler = function (event) {
 
     if (cityName) {
         getPlaces(cityName);
-        //searchHistory.push(cityName)
-        //localStorage.setItem('search', JSON.stringify(searchHistory));
-
-        
     }
 };
 
@@ -197,11 +190,12 @@ var createCards = function () {
             localStorage.setItem("save", JSON.stringify(saveHistory));
 
             addSaveItem();
-
+            handleClick();
         })
     }
 
     sectionCards.classList.remove("hidden");
+    
 };
 
 function addSaveItem() {
@@ -342,16 +336,35 @@ function callSaveHistory() {
         // saveItem.setAttribute("class", "btn");
         // saveItem.setAttribute("value", saveHistory[i]);
         //sHistory.append(saveItem);
+
+        // onclick save, do local storage
+        deleteBtn.addEventListener('click', function () {
+            console.log('CLICKED BUTTON DELETE')
+            deleteSave();
+        })
+
+        myList.classList.remove('hidden');
+
     }
 }
 
 callSaveHistory();
 
 function deleteSave() {
-    localStorage.clear();
-    saveHistory = [];
+    localStorage.removeItem("save");
 }
-// deleteSave();
+
+function handleClick() {
+    count += 1;
+
+    if (count > 0) {
+        slideView.classList = "hidden";
+        slideDot.classList = "hidden";
+    } else {
+        slideView.classList.remove("hidden");
+        slideDot.classList.remove("hidden");
+    }
+}
 
 // // Clear History
 // clearSearch.addEventListener("click", function () {
