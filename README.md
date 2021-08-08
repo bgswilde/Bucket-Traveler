@@ -10,7 +10,7 @@
 ### User Story
 
 
-    As a USER I want to search for vacation locations and find locl attractions to visit while I am there.
+    As a USER I want to search for vacation locations and find local attractions to visit while I am there.
 
     Acceptance Criteria:
         --When I enter a location into a search bar and click on the search icon to submit,
