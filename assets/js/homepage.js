@@ -66,7 +66,7 @@ var searchSubmitHandler = function (event) {
         //searchHistory.push(cityName)
         //localStorage.setItem('search', JSON.stringify(searchHistory));
 
-        
+
     }
 };
 
@@ -206,6 +206,8 @@ var createCards = function () {
 
 // creates the cards to go in the bucket list
 var bucketCards = function (savedItemData) {
+    deleteCards.classList.remove('hidden')
+
     // create a column div to hold the card
     var columnDiv = document.createElement("div");
     columnDiv.classList = "column is-12-mobile is-6-tablet is-3-desktop is-3-widescreen is-3-fullhd";
@@ -263,17 +265,6 @@ var bucketCards = function (savedItemData) {
     placeCard.appendChild(placeTitle);
     placeCard.appendChild(placeText);
     columnDiv.appendChild(footerCard);
-
-
-    // // onclick save, do local storage
-    // deleteBtn.addEventListener('click', function () {
-    //     console.log('CLICKED BUTTON DELETE')
-    //     console.log(savedItemData)
-    //    // deleteSave(savedItemData);
-    //    var del = savedItemData.data;
-    //    localStorage.removeItem('del');
-    // })
-
 };
 
 function addSaveItem() {
@@ -287,15 +278,6 @@ function addSaveItem() {
         bucketCards(saveHistory[i]);
     }
 };
-
-
-// Clear History
-deleteCards.addEventListener("click", function () {
-    console.log("BUTTON CLICKED")
-    localStorage.clear();
-    saveHistory = [];
-    callSaveHistory();
-})
 
 function callSaveHistory() {
     // goes through the whole saved array to create cards in the bucket list
@@ -312,6 +294,16 @@ function callSaveHistory() {
 }
 // loads the Bucket List upon page load
 callSaveHistory();
+
+
+ // Clear History
+ deleteCards.addEventListener("click", function () {
+    console.log("CLICKED BUTTON DELETE")
+    localStorage.clear();
+    saveHistory = [];
+    callSaveHistory();
+    location.reload();
+});
 
 // event listeners
 searchEl.addEventListener("submit", searchSubmitHandler);
