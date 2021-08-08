@@ -212,6 +212,8 @@ var createCards = function () {
 
 // FUNCTION TO CREATE CARDS TO GO INTO BUCKETLIST. USED WHEN CARD IS SAVED AND WHEN LOCAL STORAGE IS CALLED ON PAGE LOAD
 var bucketCards = function (savedItemData) {
+    deleteCards.classList.remove('hidden')
+
     // create a column div to hold the card
     var columnDiv = document.createElement("div");
     columnDiv.classList = "column is-12-mobile is-6-tablet is-3-desktop is-3-widescreen is-3-fullhd";
