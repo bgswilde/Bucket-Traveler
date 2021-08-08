@@ -1,6 +1,7 @@
 /*  CSS for Slide images */
 * {
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 :root {
@@ -111,6 +112,10 @@ body {
 }
 
 .hero {
+    z-index: 9999;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
     background-image: url(../images/pexels-pixabay-210186.jpg);
     justify-content: center;
     align-items: center;
@@ -200,6 +205,15 @@ img {
 .m-20 {
     margin: 20px;
 }
+
+.f {
+    font-size: 10pt;
+}
+
+.f-2 {
+    font-size: 9pt;
+}
+
 .hidden {
     display: none !important;
 }

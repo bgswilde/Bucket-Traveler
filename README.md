@@ -2,12 +2,12 @@
 >  link web page  :  https://derimarg.github.io/destination-hub/
 
 ## Description
-
+---
 The purpose of Destination Hub (aka Bucket Traveler) is to make it easier for users to find and save a bucket list of travel destinations.  When searching a location, users will be able to find different attractions and create their own “bucket list” of events.
 
 It is often hard to remember and research all the different attractions. We are building this website  to make the process more efficient.
 ## User Story
-
+---
 As a USER I want to search for vacation locations and find local attractions to visit while I am there.
 
 Acceptance Criteria:
@@ -27,7 +27,7 @@ Acceptance Criteria:
 - When I type in a new location, then the cards onthe screen will be replaced with new cards from the newly searched location.
 
 ## Future Enhancements
-
+---
 Future Enhancements:
 
 - Add map to display where all the attractions are in relation to the city searched
