@@ -18,10 +18,9 @@ var myList = document.getElementById("label");
 const save = document.getElementsByClassName("s-card");
 var saveHistory = JSON.parse(localStorage.getItem("save")) || [];
 const sHistory = document.getElementById("save-id");
-var deleteCard = document.getElementsByClassName("d-btn");
+var deleteCards = document.getElementById("clear-history")
 var slideView = document.getElementById("gallery");
 var slideDot = document.getElementById("dot-gallery");
-let count = 0;
 
 var slideIndex = 1;
 showSlides(slideIndex);
@@ -245,18 +244,18 @@ var bucketCards = function (savedItemData) {
     // create a card footer with delete and more buttons
     var footerCard = document.createElement("div");
     var footer = document.createElement("footer");
-    var deleteBtn = document.createElement("button");
+    // var deleteBtn = document.createElement("button");
     var moreBtn = document.createElement("a");
     footerCard.classList = "card br-0";
     footer.classList = "card-footer";
-    deleteBtn.classList = "card-footer-item btn2 d-btn";
-    deleteBtn.textContent = "Delete";
+    //deleteBtn.classList = "card-footer-item btn2 d-btn";
+    // deleteBtn.textContent = "Delete";
     moreBtn.classList = "card-footer-item btn2";
     moreBtn.textContent = "More";
     moreBtn.setAttribute("href", savedItemData.link);
     moreBtn.setAttribute("target", "_blank");
     footerCard.appendChild(footer);
-    footer.appendChild(deleteBtn);
+    //footer.appendChild(deleteBtn);
     footer.appendChild(moreBtn);
 
     // append children to card
@@ -266,12 +265,15 @@ var bucketCards = function (savedItemData) {
     columnDiv.appendChild(footerCard);
 
 
-    // onclick save, do local storage
-    deleteBtn.addEventListener('click', function () {
-        console.log('CLICKED BUTTON DELETE')
-        console.log(savedItemData)
-        deleteSave(savedItemData);
-    })
+    // // onclick save, do local storage
+    // deleteBtn.addEventListener('click', function () {
+    //     console.log('CLICKED BUTTON DELETE')
+    //     console.log(savedItemData)
+    //    // deleteSave(savedItemData);
+    //    var del = savedItemData.data;
+    //    localStorage.removeItem('del');
+    // })
+
 };
 
 function addSaveItem() {
@@ -286,28 +288,30 @@ function addSaveItem() {
     }
 };
 
+
+// Clear History
+deleteCards.addEventListener("click", function () {
+    console.log("BUTTON CLICKED")
+    localStorage.clear();
+    saveHistory = [];
+    callSaveHistory();
+})
+
 function callSaveHistory() {
     // goes through the whole saved array to create cards in the bucket list
     for (let i = 0; i < saveHistory.length; i++) {
-        // const saveItem = document.createElement("input");
         bucketCards(saveHistory[i]);
-
-        // makes the Bucket List visible
-        // myList.classList.remove('hidden');
     }
 
     if (saveHistory.length > 0) {
         bucketlistEmptyMessage.classList = "hidden";
         slideView.classList = "hidden";
         slideDot.classList = "hidden";
+        deleteCards.classList.remove('hidden')
     }
 }
 // loads the Bucket List upon page load
 callSaveHistory();
-
-function deleteSave(selectedItem) {
-    localStorage.removeItem(selectedItem.data);
-}
 
 // event listeners
 searchEl.addEventListener("submit", searchSubmitHandler);
