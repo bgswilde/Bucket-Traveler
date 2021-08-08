@@ -157,13 +157,13 @@ var createCards = function () {
         // create a title for each card
         var placeTitle = document.createElement("p");
         placeTitle.setAttribute("id", "p-title");
-        placeTitle.classList = "title is-4 mgl p-10";
+        placeTitle.classList = "title is-4 mgl p-10 f";
         placeTitle.textContent = placesArray[i].name;
 
         // create a description for each card
         var placeText = document.createElement("p");
         placeText.setAttribute("id", "p-text");
-        placeText.classList = "description ellipsis ellipsis p-10";
+        placeText.classList = "description ellipsis ellipsis p-10 f-2";
         placeText.textContent = placesArray[i].wikipedia_extracts.text;
 
         // create a card footer with save and more buttons
