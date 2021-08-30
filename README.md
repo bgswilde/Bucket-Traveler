@@ -1,14 +1,32 @@
 # Bucket Traveler
->  link web page
+>  deployed application link: https://bgswilde.github.io/Bucket-Traveler/
 
 ## Description
 ---
-The purpose of Destination Hub (aka Bucket Traveler) is to make it easier for users to find and save a bucket list of travel destinations.  When searching a location, users will be able to find different attractions and create their own “bucket list” of events.
+The purpose of Bucket Traveler is to make it easier for users to find and save a bucket list of nature based travel destinations.  When searching a city name, users will be able to find different popular nature locations within 50km of that city center and create their own “bucket list” of events.
 
-It is often hard to remember and research all the different attractions. We are building this website  to make the process more efficient.
-## User Story
+Nature spots can be hard to find, and it is often hard to remember and research all the different places you do find. Bucket Traveler is designed make the process more efficient.
+
+![Project Demo](./assets/images/demo.gif)
+
 ---
-As a USER I want to search for vacation locations and find local attractions to visit while I am there.
+## Table of Contents
+---
+- [Top of Page](#bucket-traveler)
+- [Description](#description)
+- [User Story](#user-story)
+- [Future Enhancements](#future-enhacements)
+- [Technologies](#technologies)
+- [Usage](#usage)
+- [Installation](#installation)
+- [Credits](#credits)
+- [License](#license)
+- [Author Info](#author-info)
+
+
+### User Story
+---
+As a USER I want to search for vacation locations and find local nature spots to visit while I am there.
 
 Acceptance Criteria:
 
@@ -24,37 +42,25 @@ Acceptance Criteria:
 
 - Then it will save a list at the bottom for me to refer back to.
 
-- When I type in a new location, then the cards onthe screen will be replaced with new cards from the newly searched location.
+- When I type in a new location, then the cards on the screen will be replaced with new cards from the newly searched location.
 
-## Future Enhancements
+[Back To The Top](#bucket-traveler)
+---
+
+### Future Enhancements
 ---
 Future Enhancements:
-
-- Add map to display where all the attractions are in relation to the city searched
 
 - Add flight and hotel capability 
 
 - Add log in capability so that the saved list can be shared across devices.
 
-- Return more results in search and add a carousel to display them.
+- Return more results in search and add a next button to display them.
 
-![Project Demo](./assets/images/demo.gif)
----
 
-## Table of Contents
-
-- [Destination Hub](#destination-hub)
-- [Description](#description)
-- [User Story](#user-story)
-- [Future Enhancements](#future-enhacements)
-- [Technologies](#technologies)
-- [Download](#how-to-download)
-- [License](#license)
-- [Author Info](#author-info)
-
----
 
 ## Technologies
+---
 - HTML
 - CSS
 - Bulma
@@ -62,43 +68,32 @@ Future Enhancements:
 - OpenTripMap API
 - Geoapify API
 
-[Back To The Top](#destination-hub)
+[Back To The Top](#bucket-traveler)
 
 ---
 
->## How To Download
+## Usage
 
-- Simply copy the **SSH** to the terminal or Download the **ZIP File**:
+---
 
->## Installation
+To use Bucket Traveler, simply visit the deployed application link (https://bgswilde.github.io/Bucket-Traveler/) and type the name of a city in the search bar. If the city has results, they will display in main page. When you see an item you would like to save, click save and that item will appear in your Bucket List at the bottom of the page, persisting via localStorage. If you would like to start your bucket list over, you can click the delete list button at the Bucket List, or clear out your localStorage through dev tools.
 
- Use the follow command at your terminal, **git clone** (Create a working copy of a local repository):
+If you would like to use this code to have stored on your computer and customize some searches through the opentripmap api, follow the installation instructions below.
 
-```html
-git clone git@github.com:Derimarg/destination-hub.git
-```
+## Installation
 
-After cloned the repository, create your own repository, copy the files to your repository and type in your terminal the follow commands. 
+No installation required for using this application, but you can make a copy of this repo on your machine to customize the code. You can find different API endpoints using the opentripmap api documentation here: https://opentripmap.io/docs. Use those endpoint queries in the fetch api call in the homepage.js file, line 102.
 
-```html
-git status
 
-git add -A
-
-git commit -m "Message to commit."
-
-git push or git push origin main
-```
-
-[Back To The Top](#destination-hub)
+[Back To The Top](#bucket-traveler)
 
 ---
 
 ## License
-
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 MIT License
 
-Copyright (c) 2021 Derimar Gray, Brian Wilde, Jodi Jackson, Ella haden.
+Copyright (c) 2021 Brian Wilde,  Derimar Gray, Jodi Jackson, Ella haden.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -118,10 +113,16 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-[Back To The Top](#destination-hub)
+[Back To The Top](#bucket-traveler)
 
 ---
 
+## Questions
+If you have any questions about the usage of this application, please direct them to Brian Wilde at bgswilde@gmail.com.
+
+[Back To The Top](#bucket-traveler)
+
+---
 ## Author Info
 
 >GitHub Contributors
@@ -134,4 +135,4 @@ SOFTWARE.
 
 - [Ella Haden](https://github.com/hadenella)
 
-[Back To The Top](#Bucket Traveler)
+[Back To The Top](#bucket-traveler)
