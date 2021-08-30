@@ -113,8 +113,6 @@ body {
 
 .hero {
     z-index: 9999;
-    position: sticky;
-    position: -webkit-sticky;
     top: 0;
     background-image: url(../images/pexels-pixabay-210186.jpg);
     justify-content: center;

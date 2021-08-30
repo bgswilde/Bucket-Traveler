@@ -45,7 +45,7 @@ Acceptance Criteria:
 - When I type in a new location, then the cards on the screen will be replaced with new cards from the newly searched location.
 
 [Back To The Top](#bucket-traveler)
----
+
 
 ### Future Enhancements
 ---
