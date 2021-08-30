@@ -72,6 +72,16 @@ Future Enhancements:
 
 ---
 
+## Credits
+
+---
+This project was completed in a team environment with the help of Derimar Gray, Jodi Jackson, and Ella Haden. I, Brian Wilde, had the primary role of handling the javascript functionality of calling the APIs used, getting data and dynamically creating cards on the page to display the nature locations searched, in addition to contributing to the concept of the application and input in the design of the page. The GitHub accounts of the other team members are listed at the bottom of the page.
+
+API data used was courtesy of 
+- Geoapify (taking a city name and converting it to longitude and latitude coordinates, https://www.geoapify.com/places-api)
+- OpenTripMap (getting nature location images and details, https://opentripmap.io/)
+
+
 ## Usage
 
 ---
@@ -125,11 +135,11 @@ If you have any questions about the usage of this application, please direct the
 ---
 ## Author Info
 
->GitHub Contributors
-
-- [Derimar Gray](https://github.com/Derimarg)
+>Project Contributors
 
 - [Brian Wilde](https://github.com/bgswilde)
+- 
+- [Derimar Gray](https://github.com/Derimarg)
 
 - [Jodi Jackson](https://github.com/Jodi-Jackson)
 
